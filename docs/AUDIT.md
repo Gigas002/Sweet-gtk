@@ -11,9 +11,8 @@ parts:
 
 §7 lists what was left open, and §8 is the checklist to re-run the audit.
 
-The fixes are the 14 commits on `master` from fb33d1e to c1a5771, on top of
-75a5441 (`git log --reverse --stat 75a5441..master`). Each finding is one
-commit, followed by this document.
+The fixes are the commits on `master` from fb33d1e on, on top of 75a5441
+(`git log --reverse --stat 75a5441..master`). Each finding is one commit.
 
 The repository went from 1,471 tracked files to 233, and its archive from
 15.6 MB to 1.7 MB. Node, npm and Gulp are gone. The build is one Python
@@ -121,6 +120,7 @@ keep Pantheon's styles, and Geary and Rnote keep theirs.
 | Area | Finding | Status |
 | ---- | ------- | ------ |
 | `index.theme` | It named the theme Sweet-Dark and pointed GtkTheme and MetacityTheme at a Sweet-Dark folder that no install makes. It also set an icon theme that isn't a dependency (Boston), a button layout, and the obsolete Encoding key, and the file was executable. | Fixed, medium (e2f1d1d) |
+| File modes | 48 data files were executable (images, every GTK `.scss` and `.css`, the asset SVG), and the package installed them so. Only `build.py` and `tests/compare.py` are now. | Fixed, low (a611356) |
 | Tests | There were none. `tests/compare.py` renders two revisions in private sessions and reports the pixels that differ (§8). | Fixed (f79c20c) |
 | README | It said to extract a zip and set a Metacity theme. It now covers install, the build and its needs (dart-sass, not libsass), and where to edit what. | Fixed (c1a5771) |
 
@@ -129,12 +129,14 @@ keep Pantheon's styles, and Geary and Rnote keep theirs.
 - **GNOME Shell 47+ port** (§5). This is the largest open item. Upstream's
   `gnome-shell-dark.css` for each version is the reference for what is missing.
   `tests/compare.py --shell` shows the result.
-- **AUR package.** `sweet-gtk-theme-git` (its PKGBUILD lives in
-  `awesome-sweet/PKGBUILDs` and `software-and-services/PKGBUILDs`) still:
-  - installs `gtk-2.0`, `cinnamon`, `metacity-1` and `xfwm4`;
-  - runs the deleted render scripts.
-
-  It should copy what `build.py install` copies, with no build step.
+- **AUR package.** `sweet-gtk-theme-git` (in `awesome-sweet/PKGBUILDs` and
+  `software-and-services/PKGBUILDs`) built upstream's `nova` branch: it rendered
+  images with the deleted scripts and installed GTK 2, Cinnamon, Metacity and
+  Xfwm4. Its font options did nothing (the shell CSS names no font) or broke
+  the theme (one size for all 17 `font-size` declarations). It is rewritten
+  to build this fork's `master` and run `build.py install`, and was
+  test-built from the local clone with makepkg: 120 files, all 644. The rewrite
+  isn't committed in those repos yet, and needs this branch pushed.
 - **Dart Sass 3.** The SCSS uses `@import` and global color functions, and
   `build.py` silences their warnings. Moving to `@use` and `color.adjust()`
   is needed before Dart Sass 3.

@@ -8,7 +8,9 @@ first). Both are rendered in private headless sessions, so the desktop is never 
 
   --gtk    tests/gallery.py, a window of GTK 3 and GTK 4 widgets, in each of five states
            (normal, hover, active, disabled, backdrop), in headless sway
-  --shell  GNOME Shell's desktop, overview, app grid, quick settings and calendar, in
+  --shell  GNOME Shell's main views (desktop with a notification, overview with two windows,
+           search, app grid, an app menu, quick settings, calendar, a dialog with check boxes
+           and an entry, the volume OSD, the window switcher and the screenshot UI), in
            headless GNOME Shell (as `gnome-shell --headless`, with a session mode that loads
            the theme's stylesheet and the screenshot extension in tests/shell-shot@sweet)
 
@@ -34,7 +36,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 PARTS = ["index.theme", "assets", "gtk-3.0", "gtk-4.0", "gnome-shell"]
 STATES = ["normal", "hover", "active", "disabled", "backdrop"]
-SHELL_SHOTS = ["welcome", "desktop", "overview", "apps", "quick-settings", "calendar"]
+SHELL_SHOTS = ["welcome", "desktop", "overview", "search", "apps", "app-menu", "quick-settings", "calendar",
+               "dialog", "osd", "switcher", "screenshot-ui"]
 
 
 def theme_at(rev, dest):
@@ -107,7 +110,7 @@ def render_shell(themes, out):
         env = clean_env(XDG_RUNTIME_DIR=runtime, HOME=home, XDG_CONFIG_HOME=os.path.join(home, ".config"),
                         XDG_DATA_HOME=os.path.join(home, ".local/share"), XDG_CACHE_HOME=os.path.join(home, ".cache"),
                         XDG_DATA_DIRS=data + ":" + os.environ.get("XDG_DATA_DIRS", "/usr/local/share:/usr/share"),
-                        SWEET_SHOT_DIR=shots)
+                        SWEET_SHOT_DIR=shots, SWEET_TESTS_DIR=HERE, GSK_RENDERER="cairo")
         log = subprocess.run(["dbus-run-session", "--", "timeout", "90", "gnome-shell", "--headless", "--wayland",
                               "--no-x11", "--virtual-monitor", "1280x800", "--mode=sweet-test"],
                              env=env, capture_output=True, text=True)

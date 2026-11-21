@@ -76,6 +76,26 @@ const VIEWS = [
         menu.open();
         return () => menu.close();
     }],
+    ['power-menu', async () => {
+        // quick settings with the power button's menu (Suspend, Restart, Power Off, Log Out) open
+        const quickSettings = Main.panel.statusArea.quickSettings;
+        quickSettings.menu.open();
+        await wait(800);
+        const menu = quickSettings._system._systemItem.menu;
+        menu.open();
+        return () => {
+            menu.close();
+            quickSettings.menu.close();
+        };
+    }],
+    ['end-session', async () => {
+        // the dialog "Log Out…" opens; asked for over D-Bus, as gnome-session does
+        const call = (method, args) => Gio.DBus.session.call('org.gnome.Shell',
+            '/org/gnome/SessionManager/EndSessionDialog', 'org.gnome.SessionManager.EndSessionDialog',
+            method, args, null, Gio.DBusCallFlags.NONE, -1, null, null);
+        call('Open', new GLib.Variant('(uuuao)', [0 /* logout */, 0, 60, []]));
+        return () => call('Close', null);
+    }],
     ['calendar', async () => {
         const menu = Main.panel.statusArea.dateMenu.menu;
         menu.open();

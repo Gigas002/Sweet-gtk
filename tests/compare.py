@@ -9,7 +9,8 @@ first). Both are rendered in private headless sessions, so the desktop is never 
   --gtk    tests/gallery.py, a window of GTK 3 and GTK 4 widgets, in each of five states
            (normal, hover, active, disabled, backdrop), in headless sway
   --shell  GNOME Shell's main views (desktop with a notification, overview with two windows,
-           search, app grid, an app menu, quick settings, calendar, a dialog with check boxes
+           search, app grid, an app menu, quick settings, its power menu, the log out dialog,
+           calendar, a dialog with check boxes
            and an entry, the volume OSD, the window switcher, the screenshot UI, the lock screen
            and its password prompt), in
            headless GNOME Shell (as `gnome-shell --headless`, with a session mode that enables
@@ -38,8 +39,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 PARTS = ["index.theme", "assets", "gtk-3.0", "gtk-4.0", "gnome-shell"]
 STATES = ["normal", "hover", "active", "disabled", "backdrop"]
-SHELL_SHOTS = ["welcome", "desktop", "overview", "search", "apps", "app-menu", "quick-settings", "calendar",
-               "dialog", "osd", "switcher", "screenshot-ui", "lock", "unlock-prompt"]
+SHELL_SHOTS = ["welcome", "desktop", "overview", "search", "apps", "app-menu", "quick-settings", "power-menu",
+               "end-session", "calendar", "dialog", "osd", "switcher", "screenshot-ui", "lock", "unlock-prompt"]
 
 
 def theme_at(rev, dest):

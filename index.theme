@@ -1,11 +1,7 @@
 [Desktop Entry]
 Type=X-GNOME-Metatheme
-Name=Sweet-Dark
-Comment=Light and dark colorful Gtk3.20+ theme
-Encoding=UTF-8
+Name=Sweet
+Comment=A dark, colorful theme for GTK 3, GTK 4 and GNOME Shell
 
 [X-GNOME-Metatheme]
-GtkTheme=Sweet-Dark
-MetacityTheme=Sweet-Dark
-IconTheme=Boston
-ButtonLayout=:minimize,maximize,close
+GtkTheme=Sweet

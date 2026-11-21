@@ -34,7 +34,7 @@ button {
 
     @include button(normal);
 
-    &.flat {
+    @at-root &.flat, %button_flat {
       @include button(undecorated);
       // to avoid adiacent buttons borders clashing when transitioning, the transition on the normal state is set
       // to none, while it's added back in the hover state, so the button decoration will fade in on hover, but
@@ -82,7 +82,13 @@ button {
       }
     }
 
-    &.flat { &:backdrop, &:disabled, &:backdrop:disabled { @include button(undecorated); }}
+    // :backdrop:disabled gets its own rule: in a list with :backdrop, sass would drop it from
+    // the selectors extending %button_flat, and the more specific :backdrop:disabled rules
+    // above would win
+    @at-root &.flat, %button_flat {
+      &:backdrop, &:disabled { @include button(undecorated); }
+      &:backdrop:disabled { @include button(undecorated); }
+    }
 
     &:disabled {
       @include button(insensitive);
@@ -125,7 +131,7 @@ button {
       }
     }
 
-    &:drop(active) {
+    @at-root &:drop(active), %button_drop_active {
       color: $drop_target_color;
       border-color: $drop_target_color;
       box-shadow: inset 0 0 0 1px $drop_target_color;
@@ -241,7 +247,7 @@ button {
         @include button(rounded-red, $b_color, white); 
       }
 
-      &.flat {
+      @at-root &.flat, %button_#{$b_type}_flat {
        // @include button(undecorated);
         @include button(rounded, $b_color, white);
         //color: $b_color; //FIXME: does it work on the dark variant?
@@ -258,8 +264,8 @@ button {
         opacity: 1;
       }
 
-      &:backdrop,
-      &.flat:backdrop {
+      @at-root &:backdrop,
+               &.flat:backdrop, %button_#{$b_type}_flat:backdrop {
         @include button(backdrop, $b_color, white);
         label { color: transparentize(white, 0.5);}
         &:active,
@@ -274,8 +280,15 @@ button {
         }
       }
 
-      &.flat {
-        &:backdrop, &:disabled, &:backdrop:disabled {
+      @at-root &.flat, %button_#{$b_type}_flat {
+        // :backdrop:disabled on its own, as for %button_flat
+        &:backdrop, &:disabled {
+          @include button(undecorated);
+
+          color: transparentize($b_color, 0.2);
+        }
+
+        &:backdrop:disabled {
           @include button(undecorated);
 
           color: transparentize($b_color, 0.2);
@@ -471,18 +484,18 @@ toolbar.inline-toolbar toolbutton:backdrop {
 %linked {
   @extend %linked_middle;
 
-  &:first-child {
+  @at-root &:first-child, %linked_first_child {
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
   }
 
-  &:last-child {
+  @at-root &:last-child, %linked_last_child {
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
     border-right-style: solid;
   }
 
-  &:only-child {
+  @at-root &:only-child, %linked_only_child {
     border-radius: 3px;
     border-style: solid;
   }
@@ -496,18 +509,18 @@ toolbar.inline-toolbar toolbutton:backdrop {
 %linked_vertical{
   @extend %linked_vertical_middle;
 
-  &:first-child {
+  @at-root &:first-child, %linked_vertical_first_child {
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
   }
 
-  &:last-child {
+  @at-root &:last-child, %linked_vertical_last_child {
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
     border-style: solid;
   }
 
-  &:only-child {
+  @at-root &:only-child, %linked_vertical_only_child {
     border-radius: 3px;
     border-style: solid;
   }
@@ -525,7 +538,8 @@ toolbar.inline-toolbar toolbutton:backdrop {
 
 /* menu buttons */
 modelbutton.flat,
-.menuitem.button.flat {
+.menuitem.button.flat,
+%modelbutton_flat {
   min-height: 26px;
   padding-left: 5px;
   padding-right: 5px;
@@ -549,7 +563,8 @@ modelbutton.flat,
   radio:first-child { margin-right: 8px; }
 }
 
-modelbutton.flat arrow {
+modelbutton.flat arrow,
+%modelbutton_flat arrow {
   background: none;
 
   &:hover { background: none; }

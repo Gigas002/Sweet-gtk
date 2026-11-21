@@ -1,7 +1,11 @@
 /*********
  * Links *
  *********/
-*:link {
+// link buttons are listed rather than extending *:link: sass would drop their
+// selectors from the state rules as covered by *:link, and they need the specificity
+*:link,
+button:link,
+button:visited {
   color: $link_color;
 
   &:visited {
@@ -32,8 +36,6 @@
 button:link,
 button:visited {
   @extend %undecorated_button;
-
-  @extend *:link;
 
   text-shadow: none;
 

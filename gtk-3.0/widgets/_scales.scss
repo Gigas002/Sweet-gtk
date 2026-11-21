@@ -9,7 +9,7 @@
 
   &:disabled { background-color: $scale_disabled_bg; }
 
-  &:backdrop {
+  @at-root &:backdrop, %scale_trough_backdrop {
     background-color: $scale_disabled_bg; 
     transition: $backdrop_transition;
 
@@ -28,8 +28,8 @@
     @include scale-highlight(right, disabled);
   }
 
-  &:backdrop,
-  &:active:backdrop {
+  @at-root &:backdrop, &:active:backdrop,
+           %scale_highlight_backdrop, %scale_highlight_backdrop:active {
     border-color: lighten($selected_bg_color, 5%);
     background-color: lighten($selected_bg_color, 5%);
     &:disabled {

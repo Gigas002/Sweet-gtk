@@ -18,7 +18,10 @@ stage {
 /* WIDGETS */
 
 /* Buttons */
-.button, .icon-button, %button {
+// .quick-settings-system-item .icon-button is listed, not extending %button: sass would drop
+// its state selectors as covered by .icon-button's, and .quick-settings .icon-button would
+// then win over them
+.button, .icon-button, .quick-settings-system-item .icon-button, %button {
   @include button(normal);
   &:focus { @include button(focus); }
   &:insensitive { @include button(insensitive); }
@@ -2389,10 +2392,7 @@ $base_padding: 6px;
 .quick-settings-system-item {
   & > StBoxLayout { spacing: 2 * $base_padding; }
 
-  .icon-button {
-    @extend %button;
-    border-radius: 50px;
-  }
+  .icon-button { border-radius: 50px; }
 }
 
 .quick-slider .icon-button:hover { @include button(hover); }

@@ -1,6 +1,7 @@
-// Run by tests/compare.py in a private headless GNOME Shell: opens the shell's views one after
-// another, screenshots each into $SWEET_SHOT_DIR as NAME.png, then quits the shell. A view that
-// fails is logged ("shell-shot: NAME: ...") and skipped.
+// Run by tests/compare.py in a private headless GNOME Shell. Loads the theme at $SWEET_THEME_CSS
+// the way the User Themes extension does (on top of GNOME's own stylesheet, kept while locked),
+// opens the shell's views one after another, screenshots each into $SWEET_SHOT_DIR as NAME.png,
+// then quits the shell. A view that fails is logged ("shell-shot: NAME: ...") and skipped.
 import Clutter from 'gi://Clutter';
 import GLib from 'gi://GLib';
 import Gio from 'gi://Gio';
@@ -110,10 +111,32 @@ const VIEWS = [
         Main.screenshotUI.open();
         return () => Main.screenshotUI.close(true);
     }],
+    // Last: the lock screen stays up. The shell only makes it when GDM runs, so it's made here.
+    ['lock', async () => {
+        const ScreenShield = await import('resource:///org/gnome/shell/ui/screenShield.js');
+        lockScreen = new ScreenShield.ScreenShield();
+        lockScreen.lock(false);
+        // locking fades the screen to black, as if it were idle: lift that
+        for (const actor of Main.layoutManager.uiGroup.get_children()) {
+            if (actor.constructor.name === 'Lightbox')
+                actor.hide();
+        }
+    }],
+    ['unlock-prompt', async () => {
+        lockScreen._dialog._showPrompt();
+    }],
 ];
+
+let lockScreen = null;
 
 export default class ShellShot extends Extension {
     enable() {
+        if (this._running)
+            return; // enabled again after locking switched the session mode
+        this._running = true;
+        // as the User Themes extension does
+        Main.setThemeStylesheet(GLib.getenv('SWEET_THEME_CSS'));
+        Main.loadTheme();
         this._run()
             .catch(e => console.error(`shell-shot: ${e}\n${e.stack}`))
             .finally(() => global.context.terminate());

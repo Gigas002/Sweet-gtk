@@ -2,5 +2,6 @@
   "uuid": "shell-shot@sweet",
   "name": "Sweet test screenshots",
   "description": "Used by tests/compare.py only: screenshots the shell's main views, then quits.",
-  "shell-version": ["46", "47", "48", "49", "50", "51"]
+  "shell-version": ["46", "47", "48", "49", "50", "51"],
+  "session-modes": ["user", "unlock-dialog"]
 }

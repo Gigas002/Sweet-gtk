@@ -1,14 +1,22 @@
 #!/usr/bin/env python3
-"""Builds the Sweet GTK and GNOME Shell theme from its SCSS.
+"""Builds the Sweet GTK and GNOME Shell theme from its SCSS and SVG.
 
     build.py [css]        compile every stylesheet below (needs dart-sass: `sass`)
-    build.py check        fail if a committed .css differs from what its .scss compiles to
+    build.py assets       render the check and radio images from src/assets.svg
+                          (needs inkscape; optipng, if installed, shrinks them)
+    build.py check        fail if a committed .css differs from what its .scss compiles
+                          to, or if an image a stylesheet names is missing or unnamed
     build.py watch        recompile whenever a .scss changes (Ctrl+C to stop)
     build.py install [DIR]
                           copy the theme to DIR/Sweet (default ~/.local/share/themes)
 
-The .css files are committed, so installing the theme needs nothing but a copy; rebuild
-them after editing any .scss.
+The .css and .png files are committed, so installing the theme needs nothing but a copy;
+rebuild them after editing a .scss or src/assets.svg.
+
+src/assets.svg draws each image in an Inkscape layer labelled "Baseplate", over a rect
+whose area is exported, with a text labelled "icon-name" giving the file name. `assets`
+renders those the stylesheets name, as assets/NAME.png (scale 1) and assets/NAME@2.png
+(scale 2). The other images (window buttons, switches) are drawn by hand.
 
 Stylesheets, each from the .scss of the same name:
 
@@ -29,6 +37,7 @@ import subprocess
 import sys
 import tempfile
 import time
+import xml.etree.ElementTree as ET
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 NAME = "Sweet"
@@ -40,6 +49,10 @@ STYLESHEETS = [
     "gtk-4.0/gtk-dark",
     "gnome-shell/gnome-shell",
 ]
+
+ASSETS_SVG = "src/assets.svg"
+# Folders of images the stylesheets use; `check` wants every file in them named by one.
+IMAGE_DIRS = ["assets", "gnome-shell/assets"]
 
 # What an installed theme is made of, relative to ROOT.
 INSTALL = [
@@ -128,7 +141,89 @@ def check(exe):
     stale = [n for n in STYLESHEETS if compile_one(exe, n) != open(os.path.join(ROOT, n + ".css")).read()]
     if stale:
         die("out of date, run build.py: " + ", ".join(n + ".css" for n in stale))
-    print("all stylesheets are up to date")
+    check_images()
+    print("all stylesheets are up to date, and every image they name is there")
+
+
+def referenced_images():
+    """Every local file a stylesheet's url() names, relative to ROOT."""
+    images = set()
+    for name in STYLESHEETS:
+        path = os.path.join(ROOT, name + ".css")
+        for url in re.findall(r"url\(\s*[\"']?([^\"')]+)[\"']?\s*\)", open(path).read()):
+            if ":" not in url:  # resource:// and the like are the shell's own
+                images.add(os.path.normpath(os.path.join(os.path.dirname(name), url)))
+    return images
+
+
+def check_images():
+    named = referenced_images()
+    missing = sorted(p for p in named if not os.path.exists(os.path.join(ROOT, p)))
+    unnamed = sorted(
+        os.path.join(d, f)
+        for d in IMAGE_DIRS
+        for f in os.listdir(os.path.join(ROOT, d))
+        if os.path.join(d, f) not in named
+    )
+    if missing:
+        die("named by a stylesheet but missing: " + ", ".join(missing))
+    if unnamed:
+        die("in the theme but named by no stylesheet: " + ", ".join(unnamed))
+
+
+INKSCAPE = "{http://www.inkscape.org/namespaces/inkscape}"
+SVG = "{http://www.w3.org/2000/svg}"
+
+
+def baseplates():
+    """{image name: id of the rect to export} from ASSETS_SVG."""
+    plates = {}
+    root = ET.parse(os.path.join(ROOT, ASSETS_SVG)).getroot()
+    for layer in root.iter(SVG + "g"):
+        if layer.get(INKSCAPE + "groupmode") != "layer":
+            continue
+        if not (layer.get(INKSCAPE + "label") or "").startswith("Baseplate"):
+            continue
+        names = ["".join(t.itertext()).strip() for t in layer.iter(SVG + "text") if t.get(INKSCAPE + "label") == "icon-name"]
+        rects = [r.get("id") for r in layer.iter(SVG + "rect")]
+        if len(names) != 1 or len(rects) != 1:
+            die(f"{ASSETS_SVG}: a baseplate needs one icon-name text and one rect, has {names} and {rects}")
+        if names[0] in plates:
+            die(f"{ASSETS_SVG}: two baseplates are named {names[0]}")
+        plates[names[0]] = rects[0]
+    return plates
+
+
+def render_assets():
+    inkscape = shutil.which("inkscape")
+    if not inkscape:
+        die("needs inkscape")
+    plates = baseplates()
+    wanted = set()
+    for p in referenced_images():
+        m = re.fullmatch(r"assets/(.+?)(@2)?\.png", p)
+        if m and m.group(1) in plates:
+            wanted.add(m.group(1))
+    with tempfile.TemporaryDirectory() as tmp:
+        actions = []
+        for name in sorted(wanted):
+            for suffix, dpi in (("", 96), ("@2", 192)):
+                out = os.path.join(tmp, f"{name}{suffix}.png")
+                actions.append(f"export-id:{plates[name]};export-dpi:{dpi};export-filename:{out};export-do")
+        result = subprocess.run(
+            [inkscape, "--actions=" + ";".join(actions), os.path.join(ROOT, ASSETS_SVG)],
+            capture_output=True, text=True,
+        )
+        made = sorted(os.listdir(tmp))
+        if result.returncode or len(made) != 2 * len(wanted):
+            sys.stderr.write(result.stderr)
+            die(f"inkscape made {len(made)} of {2 * len(wanted)} images")
+        optipng = shutil.which("optipng")
+        if optipng:
+            subprocess.run([optipng, "-quiet", "-o7", "-strip", "all"] + [os.path.join(tmp, f) for f in made], check=True)
+        for f in made:
+            shutil.move(os.path.join(tmp, f), os.path.join(ROOT, "assets", f))
+    print(f"rendered {len(made)} images to assets/")
 
 
 def scss_mtimes():
@@ -188,6 +283,8 @@ def main(argv):
     command = argv[0] if argv else "css"
     if command == "css" and len(argv) <= 1:
         build(sass())
+    elif command == "assets" and len(argv) == 1:
+        render_assets()
     elif command == "check" and len(argv) == 1:
         check(sass())
     elif command == "watch" and len(argv) == 1:

@@ -20,9 +20,12 @@ renders those the stylesheets name, as assets/NAME.png (scale 1) and assets/NAME
 
 Stylesheets, each from the .scss of the same name:
 
-    gtk-3.0/gtk.css, gtk-3.0/gtk-dark.css
-    gtk-4.0/gtk.css, gtk-4.0/gtk-dark.css
+    gtk-3.0/gtk.css
+    gtk-4.0/gtk.css
     gnome-shell/gnome-shell.css
+
+gtk-3.0/gtk-dark.css and gtk-4.0/gtk-dark.css only import gtk.css. GTK 4 needs the file
+when an app asks for the dark variant: without it, it leaves the app unstyled.
 
 Only dart-sass compiles the SCSS as written: libsass (sassc) extends selectors differently
 and adds about 1,700 wrong selectors to each GTK stylesheet. dart-sass 1.79 and later write
@@ -44,9 +47,7 @@ NAME = "Sweet"
 
 STYLESHEETS = [
     "gtk-3.0/gtk",
-    "gtk-3.0/gtk-dark",
     "gtk-4.0/gtk",
-    "gtk-4.0/gtk-dark",
     "gnome-shell/gnome-shell",
 ]
 

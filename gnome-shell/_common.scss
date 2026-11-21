@@ -173,7 +173,6 @@ $slider_size: 16px;
   height: 22px;
   background-color: transparent !important;
   background-size: contain;
-  //Gnome 3.32//
   background-image: url("assets/toggle-off.svg");
   &:checked { background-image: url("assets/toggle-on.svg"); }
   .handle {
@@ -181,13 +180,6 @@ $slider_size: 16px;
     box-shadow: none !important;
   }
 }
-
-  @each $v in us, intl {
-    .toggle-switch-#{$v} {
-      background-image: url("assets/toggle-off.svg");
-      &:checked { background-image: url("assets/toggle-on.svg"); }
-    }
-  }
 
 /* links */
 .shell-link {
@@ -227,50 +219,22 @@ $slider_size: 16px;
     width: 20em;
     margin-bottom: 6px;
   }
-  .run-dialog-error-box {
-    color: $error_color;
-    padding-top: 16px;
-    spacing: 6px;
-  }
-  .run-dialog-button-box { padding-top: 1em; }
-  .run-dialog-label {
-    @include fontsize($font-size + 1.1);
-    font-weight: bold;
-    color: darken($osd_fg_color,10%);
-    padding-bottom: .4em;
-  }
 
 }
 
-  .mount-dialog-subject,
-  .end-session-dialog-subject { //this should be a generic header class
-    @include fontsize($font-size * 1.3);
-  }
 
 /* Message Dialog */
-  .message-dialog-main-layout {
-    padding: 12px 20px 0;
-    spacing: 12px;
-  }
 
   .message-dialog-content {
     max-width: 28em;
     spacing: 20px;
   }
 
-  .message-dialog-icon {
-    min-width: 48px;
-    icon-size: 48px;
-  }
 
   .message-dialog-title {
     font-weight: bold;
   }
 
-  .message-dialog-subtitle {
-    color: darken($fg_color,40%);
-    font-weight: bold;
-  }
 
 /* End Session Dialog */
 .end-session-dialog {
@@ -287,134 +251,8 @@ $slider_size: 16px;
   }
 }
 
-  .end-session-dialog-list {
-      padding-top: 20px;
-  }
-
-  .end-session-dialog-layout {
-    padding-left: 17px;
-    &:rtl { padding-right: 17px; }
-  }
-
-  .end-session-dialog-description {
-    width: 28em;
-    padding-bottom: 10px;
-    &:rtl {
-      text-align: right;
-    }
-  }
-
-  .end-session-dialog-warning {
-    width: 28em;
-    color: $warning_color;
-    padding-top: 6px;
-    &:rtl {
-      text-align: right;
-    }
-  }
-
-  .end-session-dialog-logout-icon {
-    //border: 2px solid #8b8b8b;
-    border-radius: 3px;
-    width: 48px;
-    height: 48px;
-    background-size: contain;
-  }
-
-  .end-session-dialog-shutdown-icon {
-    color: $error_color;
-    width: 48px;
-    height: 48px;
-  }
-
-  .end-session-dialog-inhibitor-layout {
-    spacing: 16px;
-    max-height: 200px;
-    padding-right: 65px;
-    padding-left: 65px;
-  }
-
-  .end-session-dialog-session-list,
-  .end-session-dialog-app-list {
-    spacing: 1em;
-  }
-
-  .end-session-dialog-list-header {
-    font-weight: bold;
-    &:rtl { text-align: right; }
-  }
-
-  .end-session-dialog-app-list-item,
-  .end-session-dialog-session-list-item {
-    spacing: 1em;
-  }
-
-  .end-session-dialog-app-list-item-name,
-  .end-session-dialog-session-list-item-name {
-    font-weight: bold;
-  }
-
-  .end-session-dialog-app-list-item-description {
-    color: darken($fg_color,5%);
-    font-size: 10pt;
-  }
 
 /* ShellMountOperation Dialogs */
-.shell-mount-operation-icon { icon-size: 48px; }
-
-  .mount-dialog {
-    spacing: 24px;
-
-    .message-dialog-title {
-      padding-top: 10px;
-      padding-left: 17px;
-      padding-bottom: 6px;
-      max-width: 34em;
-    }
-
-    .message-dialog-title:rtl {
-      padding-left: 0px;
-      padding-right: 17px;
-    }
-
-    .message-dialog-body {
-      padding-left: 17px;
-      width: 28em;
-    }
-
-    .message-dialog-body:rtl {
-      padding-left: 0px;
-      padding-right: 17px;
-    }
-  }
-
-  .mount-dialog-app-list {
-    max-height: 200px;
-    padding-top: 24px;
-    padding-left: 49px;
-    padding-right: 32px;
-  }
-
-  .mount-dialog-app-list:rtl {
-    padding-right: 49px;
-    padding-left: 32px;
-  }
-
-  .mount-dialog-app-list-item {
-    color: darken($fg_color,10%);
-    &:hover { color: $fg_color; }
-    &:ltr { padding-right: 1em; }
-    &:rtl { padding-left: 1em; }
-  }
-
-  .mount-dialog-app-list-item-icon {
-    &:ltr { padding-right: 17px; }
-    &:rtl { padding-left: 17px; }
-  }
-
-  .mount-dialog-app-list-item-name {
-    font-size: 10pt;
-  }
 
 
 /* Password or Authentication Dialog */
@@ -425,19 +263,10 @@ $slider_size: 16px;
   border: none;
   border-radius: 10px;
 
-  .message-dialog-main-layout { spacing: 24px; padding: 10px; }
   .message-dialog-content { spacing: 16px; }
   .message-dialog-title { color: darken($osd_fg_color,25%); }
 }
 
-  .prompt-dialog-description:rtl {
-    text-align: right;
-  }
-
-  .prompt-dialog-password-box {
-    spacing: 1em;
-    padding-bottom: 1em;
-  }
 
   .prompt-dialog-error-label {
     font-size: 10pt;
@@ -475,27 +304,12 @@ $slider_size: 16px;
     color: $warning_color;
   }
 
-  .polkit-dialog-user-icon {
-    border-radius: 3px;
-    background-size: contain;
-    width: 48px;
-    height: 48px;
-  }
 
 /* Audio selection dialog */
 .audio-device-selection-dialog {
   spacing: 30px;
 }
 
-  .audio-selection-content {
-    spacing: 20px;
-    padding: 24px;
-  }
-
-  .audio-selection-title {
-    font-weight: bold;
-    text-align: center;
-  }
 
   .audio-selection-box {
     spacing: 20px;
@@ -528,26 +342,13 @@ $slider_size: 16px;
 
 /* Extension Dialog */
 .extension-dialog {
-  .message-dialog-main-layout { spacing: 24px; padding: 10px; }
   .message-dialog-title { color: darken($osd_fg_color,25%); }
 }
 
 /* Inhibit-Shortcuts Dialog */
-.inhibit-shortcuts-dialog {
-  spacing: 30px;
-}
 
 /* Network Agent Dialog */
 
-.network-dialog-secret-table {
-  spacing-rows: 15px;
-  spacing-columns: 1em;
-}
-
-.keyring-dialog-control-table {
-  spacing-rows: 15px;
-  spacing-columns: 1em;
-}
 
 /* Popovers/Menus */
 
@@ -692,10 +493,6 @@ $slider_size: 16px;
     -barlevel-overdrive-color: $red;
     -barlevel-overdrive-separator-width: 0.2em; 
   }
-  .level-bar {
-    background-color: $selected_bg_color;
-    border-radius: 0.3em;
-  }
 }
 
 /* Pad OSD */
@@ -773,11 +570,7 @@ $slider_size: 16px;
 .cycler-highlight { border: 5px solid $selected_bg_color; }
 
 /* Workspace Switcher */
-.workspace-switcher-group { padding: 12px; }
 
-  .workspace-switcher-container {
-    @extend %osd-panel;
-  }
 
   .workspace-switcher {
     background: transparent;
@@ -787,29 +580,6 @@ $slider_size: 16px;
     spacing: 8px;
   }
 
-  .ws-switcher-active-up,
-  .ws-switcher-active-down,
-  .ws-switcher-active-left,
-  .ws-switcher-active-right {
-    height: 50px;
-    background-color: $selected_bg_color;
-    color: $selected_fg_color;
-    border: none;
-    background-size: 32px;
-    border-radius: 8px;
-  }
-  .ws-switcher-active-up {
-    background-image: url("assets/ws-switch-arrow-up.png"); }
-
-  .ws-switcher-active-down {
-    background-image: url("assets/ws-switch-arrow-down.png"); }
-
-  .ws-switcher-box {
-    height: 50px;
-    border: 1px solid transparentize($osd_fg_color,0.9);
-    background: darken($_bubble_bg_color, 10%);
-    border-radius: 8px;
-  }
 
 %osd-panel {
   color: $_bubble_fg_color;
@@ -858,22 +628,6 @@ $slider_size: 16px;
     spacing: 4px;
   }
 
-  .panel-corner {
-    -panel-corner-radius: 0px;
-    -panel-corner-background-color: rgba(0, 0, 0, 0.2);
-    -panel-corner-border-width: 2px;
-    -panel-corner-border-color: transparent;
-
-    &:active, &:overview, &:focus {
-      -panel-corner-border-color: lighten($selected_bg_color,5%);
-    }
-
-    &.lock-screen, &.login-screen, &.unlock-screen {
-      -panel-corner-radius: 0;
-      -panel-corner-background-color: transparent;
-      -panel-corner-border-color: transparent;
-    }
-  }
 
   .panel-button {
     -natural-hpadding: 12px;
@@ -889,7 +643,6 @@ $slider_size: 16px;
       margin-right: 4px;
       //dimensions of the icon are hardcoded
     }
-
 
 
     &:hover {
@@ -942,16 +695,12 @@ $slider_size: 16px;
     spacing: 0;
   }
 
-  .screencast-indicator { color: $warning_color; }
 
   &.solid {
     background-color: $dracula;
     /* transition from transparent to solid */
     transition-duration: 300ms;
 
-    .panel-corner {
-      -panel-corner-background-color: black;
-    }
     .system-status-icon,
     .app-menu-icon > StIcon,
     .popup-menu-arrow {
@@ -983,9 +732,7 @@ $slider_size: 16px;
       padding: 0;
     }
 
-    .datemenu-today-button,
-    .events-section-title,
-    .message-list-section-title {
+    .datemenu-today-button {
       border-radius: 4px;
       color: $fg_color;
       padding: .4em;
@@ -994,8 +741,6 @@ $slider_size: 16px;
     .datemenu-today-button,
     .world-clocks-button,
     .weather-button,
-    .events-section-title,
-    .message-list-section-title,
     .events-button {
       &:hover,&:focus { background-color: lighten($bg_color,5%); }
       &:active {
@@ -1013,8 +758,6 @@ $slider_size: 16px;
 
     .world-clocks-header,
     .weather-header,
-    .events-section-title,
-    .message-list-section-title,
     .events-title {
       color: darken($fg_color, 10%);
       font-weight: bold;
@@ -1064,7 +807,7 @@ $slider_size: 16px;
     }
 
 
-    .calendar-day-base, .calendar-day {
+    .calendar-day {
       font-size: 80%;
       text-align: center;
       width: 2.4em; height: 2.4em;
@@ -1102,9 +845,6 @@ $slider_size: 16px;
       .calendar-work-day {
 
       }
-      .calendar-nonwork-day {
-        color: $insensitive_fg_color;
-      }
        // Today
       .calendar-today {
         font-weight: bold;
@@ -1133,10 +873,6 @@ $slider_size: 16px;
         font-weight: bold;
         background-image: url("assets/calendar-today.svg");
       }
-      .calendar-other-month-day {
-        color: $insensitive_fg_color;
-        opacity: 0.5;
-      }
       .calendar-week-number {
         font-size: 70%;
         font-weight: bold;
@@ -1164,21 +900,6 @@ $slider_size: 16px;
         .message-list-section-list {
           spacing: 0.4em;
         }
-        .message-list-section-close{
-          & > StIcon {
-            icon-size: 16px;
-            border-radius: 16px;
-            padding: 8px;
-            color: $fg_color;
-            background-color: transparent;
-          }
-          &:hover > StIcon,
-          &:focus > StIcon
-          &:active > StIcon{
-            color: $red;
-            background: transparent;
-          }
-        }
 
         .message {
           &:hover,&:focus { 
@@ -1192,18 +913,6 @@ $slider_size: 16px;
           box-shadow: none;
         }
 
-          .message-secondary-bin > .event-time {
-            color: darken($fg_color, 15%);
-            font-size: 0.7em;
-            /* HACK: the label should be baseline-aligned with a 1em label,
-                     fake this with some bottom padding */
-            padding-bottom: 0.13em;
-           
-          }
-
-          .message-secondary-bin > StIcon {
-            icon-size: 16px;
-          }
 
           .message-title {
             //color: darken($fg_color,5%);
@@ -1250,16 +959,6 @@ $slider_size: 16px;
   &:insensitive { color: lighten($insensitive_fg_color, 5%); }
   
 }
-          .media-message-cover-icon {
-            icon-size: 48px !important;
-            &.fallback {
-              color: lighten($bg_color,10%);
-              background-color: $bg_color;
-              border: 2px solid $bg_color;
-              border-radius: 2px;
-              icon-size: 16px;
-              padding: 8px; }
-          }
 /* World clocks */
 .world-clocks-button {
   
@@ -1311,14 +1010,6 @@ $slider_size: 16px;
 
   // a little unstructured mess:
 
-  .system-switch-user-submenu-icon.user-icon {
-    icon-size: 20px;
-    padding: 0 2px;
-  }
-  .system-switch-user-submenu-icon.default-icon {
-    icon-size: 16px;
-    padding: 0 4px;
-  }
 
   #appMenu {
     spinner-image: url("assets/process-working.svg");
@@ -1327,33 +1018,6 @@ $slider_size: 16px;
     .label-shadow { color: transparent; }
   }
 
-  .aggregate-menu {
-    min-width: 21em;
-    .popup-menu-icon { padding: 0 4px; }
-  }
-
-  .system-menu-action {
-
-    color: $fg_color;
-   
-    border-radius: 32px; /* wish we could do 50% */
-    border: 1px solid $borders_color;
-    background: darken($bg_color, 3%);
-    padding: 13px;
-
-    &:hover, &:focus {
-      border: 1px solid $selected_bg_color;
-      color: $selected_bg_color;
-      background: transparent;
-    }
-    &:active {
-       background-color: darken($selected_bg_color, 10%);
-       color: $selected_fg_color; 
-       border: 1px solid darken($selected_bg_color, 10%);
-      }
-
-    & > StIcon { icon-size: 16px; }
-  }
 
 //Activities Ripples
 .ripple-box {
@@ -1390,45 +1054,6 @@ $slider_size: 16px;
 
 /* NETWORK DIALOGS */
 
-.nm-dialog {
-  max-height: 34em;
-  min-height: 31em;
-  min-width: 32em;
-}
-
-  .nm-dialog-content {
-    spacing: 20px;
-    padding: 24px;
-  }
-  .nm-dialog-header-hbox { spacing: 10px; }
-  .nm-dialog-airplane-box { spacing: 12px; }
-
-  .nm-dialog-airplane-headline {
-    font-weight: bold;
-    text-align: center;
-  }
-
-  .nm-dialog-airplane-text { color: $fg_color; }
-  .nm-dialog-header-icon { icon-size: 32px; }
-  .nm-dialog-scroll-view { border: 2px solid $borders_color; background: $bg_color;}
-  .nm-dialog-header { font-weight: bold; }
-
-  .nm-dialog-item {
-    font-size: 110%;
-    border-bottom: 1px solid $borders_color;
-    padding: 12px;
-    spacing: 20px;
-  }
-
-  .nm-dialog-item:selected {
-    background-color: $selected_bg_color;
-    color: $selected_fg_color;
-  }
-
-  .nm-dialog-icons { spacing: .5em; }
-  .nm-dialog-icon { icon-size: 16px; }
-  .no-networks-label { color: #999999; }
-  .no-networks-box { spacing: 12px; }
 
 /* OVERVIEW */
 
@@ -1451,14 +1076,6 @@ $slider_size: 16px;
     &.external-monitor { padding: 16px; }
   }
 
-  .window-clone-border {
-    border: 4px solid transparentize($selected_bg_color,.7);
-    border-radius: 0px;
-    // For window decorations with round corners we can't match
-    // the exact shape when the window is scaled. So apply a shadow
-    // to fix that case
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
-  }
   .window-caption {
     spacing: 20px;
     color: $topbar_color;
@@ -1496,9 +1113,6 @@ $slider_size: 16px;
     }
   }
 
-  #searchResultsBin {
-    max-width: 1000px;
-  }
 
   #searchResultsContent {
     padding-left: 20px;
@@ -1573,30 +1187,7 @@ $slider_size: 16px;
     icon-size: 48px;
   }
 
-  .app-view-controls { //favorties | all toggle container
-    padding-bottom: 32px;
 
-  }
-  .app-view-control { //favorties | all toggle button
-    padding: 4px 32px;
-    &:checked { 
-      @include gradient();
-      color: #fff;
-    }
-    &:hover {
-      border: none;
-    }
-    &:first-child {
-      border-right-width: 0;
-      border-radius: 3px 0 0 3px;
-    }
-    &:last-child {
-     border-radius: 0 3px 3px 0;
-    }
-  }
-
-  .app-well-app,
-  .app-well-app.app-folder,
   .show-apps,
   .grid-search-result,
   .overview-tile {
@@ -1637,7 +1228,7 @@ $slider_size: 16px;
     }
   }
 
-  .app-well-app-running-dot, .app-grid-running-dot { //running apps indicator
+  .app-grid-running-dot { //running apps indicator
     width: 4px; height: 4px;
     background-color: $selected_bg_color;
     border-radius: 10px !important;
@@ -1656,7 +1247,7 @@ $slider_size: 16px;
   }
 
   /* App Folders */
-.app-well-app.app-folder, .app-folder {
+.app-folder {
   background-color: lighten($bg_color, 5%);
   border-radius: 18px;
 }
@@ -1669,21 +1260,8 @@ $slider_size: 16px;
 
   & .folder-name-label { color: $fg_color; }
   
-  .edit-folder-button {
-    @extend %button;
-
-    padding: 0;
-    width: 36px;
-    height: 36px;
-    border-radius: 18px;
-
-    & > StIcon { icon-size: 16px }
-  }
 }
 
-  .app-well-app.app-folder > .overview-icon {
-    background-color: transparentize($osd_bg_color,.6);
-  }
   .show-apps .show-apps-icon {
     color: $topbar_color;
   }
@@ -1693,20 +1271,6 @@ $slider_size: 16px;
     transition-duration: 100ms;
   }
 
-
-  // Collections
-  .app-folder-popup { //expanded collection
-    -arrow-border-radius: 8px;
-    -arrow-background-color: transparentize($bg_color,0.5);
-    -arrow-base: 24px;
-    -arrow-rise: 11px;
-  }
-  .app-folder-popup-bin { padding: 5px; background: transparentize($bg_color,.5);;}
-  .app-folder-icon {
-    padding: 5px;
-    spacing-rows: 5px;
-    spacing-columns: 5px;
-  }
 
   .page-indicator {
     padding: 6px 12px;
@@ -1720,9 +1284,7 @@ $slider_size: 16px;
     }
   }
 
-  .no-frequent-applications-label { @extend %status_text; }
 
-  .app-well-app > .overview-icon.overview-icon-with-label,
   .grid-search-result .overview-icon.overview-icon-with-label {
     padding: 10px 8px 5px 8px;
     spacing: 4px;
@@ -1745,9 +1307,7 @@ $slider_size: 16px;
   }
 
   //Some hacks I don't even
-  .search-display > StBoxLayout,
-  .all-apps,
-  .frequent-apps > StBoxLayout {
+  .search-display > StBoxLayout {
     // horizontal padding to make sure scrollbars or dash don't overlap content
     padding: 0px 88px 10px 88px;
   }
@@ -1799,15 +1359,7 @@ $slider_size: 16px;
     }
     * { color: $fg_color; }
 
-    .notification-icon { padding: 5px; }
-    .notification-content { padding: 5px; spacing: 5px; }
     .secondary-icon { icon-size: 1.09em; }
-    .notification-actions {
-      background-color: darken($bg_color, 2%);
-      padding-top: 2px;
-      spacing: 1px;
-      border-radius: 0px 0px 12px 12px;
-    }
     .notification-button {
       padding: 7px;
       background-color: transparentize($bg_color, 0.1);
@@ -1827,85 +1379,9 @@ $slider_size: 16px;
       border-radius: 10px !important;
     }
   }
-  .summary-source-counter {
-    font-size: 10pt;
-    font-weight: bold;
-    height: 1.6em; width: 1.6em;
-    -shell-counter-overlap-x: 3px;
-    -shell-counter-overlap-y: 3px;
-    background-color: $selected_bg_color;
-    color: $selected_fg_color;
-    border: 2px solid $osd_fg_color;
-    box-shadow: 0 2px 2px rgba(0,0,0,0.5);
-    border-radius: 0.9em; // should be 0.8 but whatever; wish I could do 50%;
-  }
 
   .secondary-icon { icon-size: 1.09em; }
 
-  //chat bubbles
-  .chat-body { spacing: 5px; }
-  .chat-response { margin: 5px; }
-  .chat-log-message { color: darken($fg_color,10%); }
-  .chat-new-group { padding-top: 1em; }
-  .chat-received {
-    padding-left: 4px;
-    &:rtl { padding-left: 0px; padding-right: 4px; }
-  }
-  .chat-sent {
-    padding-left: 18pt;
-    color: darken($fg_color, 15%);
-    &:rtl { padding-left: 0; padding-right: 18pt; }
-  }
-  .chat-meta-message {
-    padding-left: 4px;
-    font-size: 9pt;
-    font-weight: bold;
-    color: darken($fg_color,20%);
-    &:rtl { padding-left: 0; padding-right: 4px; }
-  }
-
-  //hotplug
-  .hotplug-transient-box {
-    spacing: 6px;
-    padding: 2px 72px 2px 12px;
-  }
-    .hotplug-notification-item {
-      padding: 2px 10px;
-      &:focus { padding: 1px 71px 1px 11px; }
-    }
-
-    .hotplug-notification-item-icon {
-      icon-size: 24px;
-      padding: 2px 5px;
-    }
-
-    .hotplug-resident-box { spacing: 8px; }
-
-    .hotplug-resident-mount {
-      spacing: 8px;
-      border-radius: 4px;
-      &:hover { background-color: transparentize($bg_color,0.7); }
-    }
-
-    .hotplug-resident-mount-label {
-      color: inherit;
-      padding-left: 6px;
-    }
-
-    .hotplug-resident-mount-icon {
-      icon-size: 24px;
-      padding-left: 6px;
-    }
-
-    .hotplug-resident-eject-icon {
-      icon-size: 16px;
-    }
-
-    .hotplug-resident-eject-button {
-      padding: 7px;
-      border-radius: 5px;
-      color: pink;
-    }
 
 /* Eeeky things */
 
@@ -1923,12 +1399,6 @@ $slider_size: 16px;
     background-color: transparentize($osd_bg_color, 0.3);
 }
 
-  .keyboard-layout {
-    spacing: 10px;
-    padding: 10px;
-  }
-
-  .keyboard-row { spacing: 15px; }
 
   .keyboard-key {
    @include button(normal);
@@ -1990,20 +1460,9 @@ $slider_size: 16px;
 
   .candidate-page-button-previous { border-radius: 4px 0px 0px 4px; border-right-width: 0; }
   .candidate-page-button-next { border-radius: 0px 4px 4px 0px;  }
-  .candidate-page-button-icon { icon-size: 1em; }
 
 /* Auth Dialogs & Screen Shield */
 
-.framed-user-icon {
-  background-size: contain;
-  border: 2px solid $osd_fg_color;
-  color: $osd_fg_color;
-  border-radius: 3px;
-  &:hover {
-    border-color: lighten($osd_fg_color,30%);
-    color: lighten($osd_fg_color,30%);
-  }
-}
 
 // LOGIN DIALOG
 
@@ -2073,7 +1532,6 @@ $slider_size: 16px;
     &:focus .login-dialog-timed-login-indicator { background-color: $selected_fg_color; }
   }
 
-  .login-dialog-username,
   .user-widget-label {
     color: $osd_fg_color;
     font-size: 120%;
@@ -2093,11 +1551,6 @@ $slider_size: 16px;
       width: 23em;
   }
 
-  .login-dialog-prompt-label {
-      color: darken($osd_fg_color, 20%);
-      font-size: 110%;
-      padding-top: 1em;
-  }
 
   .login-dialog-session-list-button StIcon {
       icon-size: 1.25em;
@@ -2111,61 +1564,6 @@ $slider_size: 16px;
 
 //SCREEN SHIELD
 
-.screen-shield-arrows {
-    padding-bottom: 3em;
-}
-
-.screen-shield-arrows Gjs_Arrow {
-    color: white;
-    width: 80px;
-    height: 48px;
-    -arrow-thickness: 12px;
-    -arrow-shadow: 0 1px 1px rgba(0,0,0,0.4);
-}
-
-.screen-shield-clock {
-  color: white;
-  text-shadow: 0px 1px 2px rgba(0,0,0,0.6);
-  font-weight: bold;
-  text-align: center;
-  padding-bottom: 1.5em;
-}
-
-.screen-shield-clock-time {
-  font-size: 72pt;
-  text-shadow: 0px 2px 2px rgba(0,0,0,0.4);
-}
-
-.screen-shield-clock-date { font-size: 28pt; }
-
-.screen-shield-notifications-container {
-  spacing: 6px;
-  width: 30em;
-  background-color: transparent;
-  max-height: 500px;
-  .summary-notification-stack-scrollview {
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-
-  .notification,
-  .screen-shield-notification-source {
-    padding: 12px 6px;
-    border: 1px solid $_bubble_borders_color;
-    background-color: transparentize($osd_bg_color,0.5);
-    color: $_bubble_fg_color;
-    border-radius: 4px;
-  }
-  .notification { margin-right: 15px; } //compensate for space allocated to the scrollbar
-}
-
-
-.screen-shield-notification-label {
-  font-weight: bold;
-  padding: 0px 0px 0px 12px;
-}
-
-.screen-shield-notification-count-text { padding: 0px 0px 0px 12px; }
 
 #panel.lock-screen { background-color: transparentize($_bubble_bg_color, 0.5); }
 
@@ -2177,14 +1575,6 @@ $slider_size: 16px;
 #lockDialogGroup {
   background: #2e3436 url(resource:///org/gnome/shell/theme/noise-texture.png);
   background-repeat: repeat;
-}
-
-#screenShieldNotifications {
-  StButton#vhandle, StButton#hhandle {
-    background-color: transparentize($bg_color,0.7);
-    &:hover, &:focus { background-color: transparentize($bg_color,0.5); }
-    &:active { background-color: transparentize($selected_bg_color,0.5); }
-  }
 }
 
 
@@ -2314,7 +1704,6 @@ $base_padding: 6px;
   &:ltr > StBoxLayout { padding-left: $base_padding*2.5; }
   &:rtl > StBoxLayout { padding-right: $base_padding*2.5; }
 
-  .quick-toggle-label { font-weight: bold; }
   //.quick-toggle-icon, .quick-toggle-arrow { icon-size: $base_icon_size; }
 }
 

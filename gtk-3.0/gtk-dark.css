@@ -1838,84 +1838,84 @@ radio:indeterminate:disabled:backdrop:selected {
 .view.content-view check, iconview.content-view check,
 .view.content-view.check,
 iconview.content-view.check {
-  -gtk-icon-source: -gtk-scaled(url("../assets/selection-mode-checkbox-unchecked.png"), url("../assets/checkbox-unchecked@2.png"));
+  -gtk-icon-source: -gtk-scaled(url("../assets/checkbox-unchecked.png"), url("../assets/checkbox-unchecked@2.png"));
   -gtk-icon-shadow: none;
 }
 
 .view.content-view radio, iconview.content-view radio,
 .view.content-view.radio,
 iconview.content-view.radio {
-  -gtk-icon-source: -gtk-scaled(url("../assets/selection-mode-radio-unchecked.png"), url("../assets/radio-unchecked@2.png"));
+  -gtk-icon-source: -gtk-scaled(url("../assets/radio-unchecked.png"), url("../assets/radio-unchecked@2.png"));
   -gtk-icon-shadow: none;
 }
 
 .view.content-view check:hover, iconview.content-view check:hover,
 .view.content-view.check:hover,
 iconview.content-view.check:hover {
-  -gtk-icon-source: -gtk-scaled(url("../assets/selection-mode-checkbox-unchecked-hover.png"), url("../assets/checkbox-unchecked-hover@2.png"));
+  -gtk-icon-source: -gtk-scaled(url("../assets/checkbox-unchecked-hover.png"), url("../assets/checkbox-unchecked-hover@2.png"));
   -gtk-icon-shadow: none;
 }
 
 .view.content-view radio:hover, iconview.content-view radio:hover,
 .view.content-view.radio:hover,
 iconview.content-view.radio:hover {
-  -gtk-icon-source: -gtk-scaled(url("../assets/selection-mode-radio-unchecked-hover.png"), url("../assets/radio-unchecked-hover@2.png"));
+  -gtk-icon-source: -gtk-scaled(url("../assets/radio-unchecked-hover.png"), url("../assets/radio-unchecked-hover@2.png"));
   -gtk-icon-shadow: none;
 }
 
 .view.content-view check:active, iconview.content-view check:active,
 .view.content-view.check:active,
 iconview.content-view.check:active {
-  -gtk-icon-source: -gtk-scaled(url("../assets/selection-mode-checkbox-unchecked-active.png"), url("../assets/checkbox-unchecked-active@2.png"));
+  -gtk-icon-source: -gtk-scaled(url("../assets/checkbox-unchecked-active.png"), url("../assets/checkbox-unchecked-active@2.png"));
   -gtk-icon-shadow: none;
 }
 
 .view.content-view radio:active, iconview.content-view radio:active,
 .view.content-view.radio:active,
 iconview.content-view.radio:active {
-  -gtk-icon-source: -gtk-scaled(url("../assets/selection-mode-radio-unchecked-active.png"), url("../assets/radio-unchecked-active@2.png"));
+  -gtk-icon-source: -gtk-scaled(url("../assets/radio-unchecked-active.png"), url("../assets/radio-unchecked-active@2.png"));
   -gtk-icon-shadow: none;
 }
 
 .view.content-view check:backdrop, iconview.content-view check:backdrop,
 .view.content-view.check:backdrop,
 iconview.content-view.check:backdrop {
-  -gtk-icon-source: -gtk-scaled(url("../assets/selection-mode-checkbox-unchecked-backdrop.png"), url("../assets/checkbox-unchecked-backdrop@2.png"));
+  -gtk-icon-source: -gtk-scaled(url("../assets/checkbox-unchecked-backdrop.png"), url("../assets/checkbox-unchecked-backdrop@2.png"));
   -gtk-icon-shadow: none;
 }
 
 .view.content-view radio:backdrop, iconview.content-view radio:backdrop,
 .view.content-view.radio:backdrop,
 iconview.content-view.radio:backdrop {
-  -gtk-icon-source: -gtk-scaled(url("../assets/selection-mode-radio-unchecked-backdrop.png"), url("../assets/radio-unchecked-backdrop@2.png"));
+  -gtk-icon-source: -gtk-scaled(url("../assets/radio-unchecked-backdrop.png"), url("../assets/radio-unchecked-backdrop@2.png"));
   -gtk-icon-shadow: none;
 }
 
 .view.content-view check:disabled, iconview.content-view check:disabled,
 .view.content-view.check:disabled,
 iconview.content-view.check:disabled {
-  -gtk-icon-source: -gtk-scaled(url("../assets/selection-mode-checkbox-unchecked-insensitive.png"), url("../assets/checkbox-unchecked-insensitive@2.png"));
+  -gtk-icon-source: -gtk-scaled(url("../assets/checkbox-unchecked-insensitive.png"), url("../assets/checkbox-unchecked-insensitive@2.png"));
   -gtk-icon-shadow: none;
 }
 
 .view.content-view radio:disabled, iconview.content-view radio:disabled,
 .view.content-view.radio:disabled,
 iconview.content-view.radio:disabled {
-  -gtk-icon-source: -gtk-scaled(url("../assets/selection-mode-radio-unchecked-insensitive.png"), url("../assets/radio-unchecked-insensitive@2.png"));
+  -gtk-icon-source: -gtk-scaled(url("../assets/radio-unchecked-insensitive.png"), url("../assets/radio-unchecked-insensitive@2.png"));
   -gtk-icon-shadow: none;
 }
 
 .view.content-view check:disabled:backdrop, iconview.content-view check:disabled:backdrop,
 .view.content-view.check:disabled:backdrop,
 iconview.content-view.check:disabled:backdrop {
-  -gtk-icon-source: -gtk-scaled(url("../assets/selection-mode-checkbox-unchecked-backdrop-insensitive.png"), url("../assets/checkbox-unchecked-backdrop-insensitive@2.png"));
+  -gtk-icon-source: -gtk-scaled(url("../assets/checkbox-unchecked-insensitive-backdrop.png"), url("../assets/checkbox-unchecked-insensitive-backdrop@2.png"));
   -gtk-icon-shadow: none;
 }
 
 .view.content-view radio:disabled:backdrop, iconview.content-view radio:disabled:backdrop,
 .view.content-view.radio:disabled:backdrop,
 iconview.content-view.radio:disabled:backdrop {
-  -gtk-icon-source: -gtk-scaled(url("../assets/selection-mode-radio-unchecked-backdrop-insensitive.png"), url("../assets/radio-unchecked-backdrop-insensitive@2.png"));
+  -gtk-icon-source: -gtk-scaled(url("../assets/radio-unchecked-insensitive-backdrop.png"), url("../assets/radio-unchecked-insensitive-backdrop@2.png"));
   -gtk-icon-shadow: none;
 }
 
@@ -5276,7 +5276,7 @@ switch:checked:disabled {
   background-image: -gtk-scaled(url("../assets/switch-on-insensitive.svg"), url("../assets/switch-on-insensitive.svg"));
 }
 switch:checked:disabled slider {
-  background-image: -gtk-scaled(url("../assets/switch-slider-on-insensitive.svg"), url("../assets/switch-slider-on-insensitive@@.png"));
+  background-image: -gtk-scaled(url("../assets/switch-slider-on-insensitive.svg"), url("../assets/switch-slider-on-insensitive@2.png"));
 }
 switch slider {
   min-width: 1px;
@@ -6225,12 +6225,6 @@ radiobutton.color-button:active > radio {
 .color-button.slate check, .color-button.slate radio {
   background-color: @SLATE_300;
   -gtk-icon-shadow: 0 1px 1px @SLATE_500;
-}
-.color-button.auto radio {
-  background-image: url("assets/color-button-auto.png");
-  background-position: -1px -1px;
-  background-repeat: no-repeat;
-  background-size: calc(100% + 2px);
 }
 
 /***********************

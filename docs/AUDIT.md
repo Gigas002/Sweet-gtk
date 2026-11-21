@@ -51,10 +51,15 @@ were compared pixel by pixel. That check is now `tests/compare.py` (§8).
   every widget. It runs in a private headless sway 1.12 with the pixman
   renderer and GTK's cairo renderer, at scale 1, and at scale 2 for the images.
 - **GNOME Shell 51.1.** It runs as `gnome-shell --headless` in its own D-Bus
-  session. A session mode with its own `stylesheetName` loads the theme, since
-  the shell reads its built-in stylesheet before any data directory. A small
-  extension screenshots the desktop with a notification, the overview, the app
-  grid, quick settings and the calendar.
+  session. A small extension loads the theme the way the User Themes extension
+  does, on top of GNOME's own stylesheet, and screenshots 14 views:
+  - the desktop with a notification, the overview with two windows, search, the
+    app grid and an app's menu;
+  - quick settings and the calendar;
+  - a dialog with check boxes, an entry and a default button;
+  - the volume OSD, Alt+Tab and the screenshot UI;
+  - the lock screen and its prompt. The shell builds these only when GDM runs,
+    so the extension builds them itself.
 - **Stylesheets.**
   - Every stylesheet went through GTK's own CSS parser (`Gtk.CssProvider`,
     GTK 3.24 and 4.24) and counted errors: 0 for both.
@@ -112,8 +117,8 @@ keep Pantheon's styles, and Geary and Rnote keep theirs.
 | Area | Finding | Status |
 | ---- | ------- | ------ |
 | Dead selectors | 126 class and id names appear in no GNOME Shell from 46.0 to 51.1, and none is built from a template string. They cover the old end-session, mount, network and run dialogs, the screen shield, the workspace-switcher popup, panel corners, app-well icons, chat bubbles and the aggregate menu (GNOME 3.x to 45). The 207 selectors that name them are gone, along with the two arrow images only they used. No remaining selector changed. Classes that exist in some supported versions only stay. | Removed, low (c4bfe42) |
-| Regressions | The shell renders identically to 2ada55f, in all six views. | OK |
-| GNOME 47+ coverage | A shell theme replaces the whole stylesheet, so what it doesn't style falls back to St's bare defaults. Stock GNOME 51 styles 436 classes, and Sweet leaves 215 of them unstyled. On 51 this shows: no workspace dots in the panel, oversized icons in quick settings and notifications, a missing welcome-dialog image, and a cramped calendar and message list. The lock and login screens, screenshot UI and dialogs are affected too. This is older than the audit and needs a port of the shell theme to current GNOME. | Open, high (§7) |
+| Regressions | The shell renders identically to 2ada55f in all 14 views, apart from the clock's minute. | OK |
+| GNOME 51 | All 14 views render correctly. A first version of the test loaded the theme as GNOME's only stylesheet, which no session does. That made the theme look broken: 215 of the 436 classes GNOME's theme styles are left to GNOME's stylesheet, and without it they fell back to St's bare defaults. A rebuild of the shell theme from GNOME 51's own was made on that basis, then dropped once the test loaded the theme as User Themes does. | OK (5e77911) |
 
 ## 6. Hygiene, tests and docs
 
@@ -126,9 +131,10 @@ keep Pantheon's styles, and Geary and Rnote keep theirs.
 
 ## 7. Left open
 
-- **GNOME Shell 47+ port** (§5). This is the largest open item. Upstream's
-  `gnome-shell-dark.css` for each version is the reference for what is missing.
-  `tests/compare.py --shell` shows the result.
+- **GNOME Shell 46–50** weren't run (nothing here can run them). Only 51.1 was
+  checked live; for 46–50, only that the removed selectors name nothing they have.
+- **The lock screen's password entry** doesn't appear without GDM (the prompt
+  stops at "Authentication error"), so it wasn't seen.
 - **AUR package.** `sweet-gtk-theme-git` (in `awesome-sweet/PKGBUILDs` and
   `software-and-services/PKGBUILDs`) built upstream's `nova` branch: it rendered
   images with the deleted scripts and installed GTK 2, Cinnamon, Metacity and

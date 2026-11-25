@@ -5408,10 +5408,10 @@ treeview.view:selected:backdrop, treeview.view:selected {
 treeview.view:disabled {
   color: #6c707b;
 }
-treeview.view:disabled:selected {
+treeview.view:disabled.view:selected {
   color: #dc6ee4;
 }
-treeview.view:disabled:selected:backdrop {
+treeview.view:disabled.view:selected:backdrop {
   color: rgba(204, 44, 216, 0.85);
 }
 treeview.view:disabled:backdrop {

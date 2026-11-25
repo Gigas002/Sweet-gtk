@@ -1506,6 +1506,9 @@ calendar > grid > label.day-number {
 calendar > grid > label.day-number:selected {
   border-radius: 3px;
 }
+calendar > grid > label.day-number:selected:backdrop:disabled {
+  color: rgba(204, 44, 216, 0.85);
+}
 calendar > grid > label.day-number:checked {
   background-color: alpha(#c50ed2,0.3);
 }
@@ -5548,12 +5551,12 @@ columnview.view:disabled,
 treeview.view:disabled {
   color: #6c707b;
 }
-columnview.view:disabled:selected,
-treeview.view:disabled:selected {
+columnview.view:disabled.view:selected,
+treeview.view:disabled.view:selected {
   color: #dc6ee4;
 }
-columnview.view:disabled:selected:backdrop,
-treeview.view:disabled:selected:backdrop {
+columnview.view:disabled.view:selected:backdrop,
+treeview.view:disabled.view:selected:backdrop {
   color: rgba(204, 44, 216, 0.85);
 }
 columnview.view.separator,

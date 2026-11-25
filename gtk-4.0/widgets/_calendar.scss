@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use '../colors' as *;
 @use '../drawing' as *;
 
@@ -52,6 +53,10 @@
         &:selected{
           @extend %selected_items;
           border-radius: 3px;
+
+          // %selected_items has this color, but sass drops the selector from its list
+          // (label:backdrop:disabled:selected is there), and :selected:backdrop would win
+          &:backdrop:disabled { color: color.mix($backdrop_selected_fg_color, $selected_bg_color, 30%); }
         }
 
         &:checked {

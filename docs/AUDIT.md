@@ -1,7 +1,8 @@
 # Audit
 
 A whole-repository audit of the Sweet GTK theme (2026-11-20 and 21) in five
-parts:
+parts, and a follow-up (2026-11-25) that cleared what it had left open in the
+SCSS (§3, §4, §7):
 
 - §2 scope: what the theme is for, and what was removed;
 - §3 build;
@@ -47,8 +48,8 @@ were compared pixel by pixel. That check is now `tests/compare.py` (§8).
   - headerbars, including one in selection mode;
   - a content view.
 
-  It forces each of five states (normal, hover, active, disabled, backdrop) on
-  every widget. It runs in a private headless sway 1.12 with the pixman
+  It forces each of six states (normal, hover, active, disabled, backdrop, and
+  disabled in backdrop) on every widget. It runs in a private headless sway 1.12 with the pixman
   renderer and GTK's cairo renderer, at scale 1, and at scale 2 for the images.
 - **GNOME Shell 51.1.** It runs as `gnome-shell --headless` in its own D-Bus
   session. A small extension loads the theme the way the User Themes extension
@@ -73,6 +74,12 @@ were compared pixel by pixel. That check is now `tests/compare.py` (§8).
   every image file against the URLs. Renders of the SVG sources were compared
   with the committed PNGs, premultiplied, so that invisible transparent pixels
   don't count.
+
+- **GTK 4 node names.** Every element name in the GTK 4 stylesheet was looked up
+  among the CSS node names that GTK 3.24.52, GTK 4.24.1 and libadwaita 1.10.0
+  create (their sources, at those tags).
+- **Byte-identical builds.** Each SCSS refactor was checked by compiling before
+  and after and comparing the CSS byte for byte.
 
 Tools: dart-sass 1.108.2, Inkscape 1.4, optipng, Python 3 with PIL and
 PyGObject.
@@ -99,7 +106,10 @@ keep Pantheon's styles, and Geary and Rnote keep theirs.
 | Gulp and npm | 170 KB of lockfile ran one command (sass). The Gulp tasks also switched the desktop to the theme with `gsettings` after every build, and `npm run build` pushed to git. They are replaced by `build.py`: `css`, `assets`, `check`, `watch` and `install`. It rounds the fractional `rgb(%)` colors dart-sass 1.79+ prints back to the hex that GTK and St read, and silences only the known deprecations. A full build takes 0.5 s. | Fixed, high (c37366d) |
 | Image pipeline | `src/` had three SVGs and two render scripts. Of the 100 images the CSS used, only 14 matched what the SVGs render: the committed "light" images had dark check marks where `gtk3-assets.svg` draws white ones. The AUR package re-renders at build time, so it shipped a different theme from the repo: 118 images differ. The scale-2 script exported at 180 dpi (images 30 px instead of 32, so checks were drawn 15 px wide), and neither script waited for Inkscape before running optipng. `gtk3-assets-dark.svg` draws every used image exactly as committed, and is now `src/assets.svg`. `build.py assets` renders exactly the images the stylesheets name, at 96 and 192 dpi, in one Inkscape run (under 1 s, deterministic). At scale 1, all 53 states are pixel-identical. At scale 2 the look is the same, now 16 px and sharper. | Fixed, high (18ce0cc) |
 | `build.py check` | Fails if a committed CSS differs from its SCSS, if a stylesheet names a missing image, or if an image is named by no stylesheet. | Fixed (c37366d, 18ce0cc) |
-| Deprecations | dart-sass warns about `@import`, global color functions, `if()`, unary minus and `/` division. These become errors in Dart Sass 3. | Accepted (§7) |
+| Deprecations | dart-sass printed 1,934 deprecation warnings (with `--verbose`), all errors in Dart Sass 3: `@import`, global color functions, the old `if()`, unary plus and `/` division. `if()` is the CSS-style `if(sass(...): a; else: b)` (so dart-sass 1.97.1 or later is needed), color functions are `color.adjust()` and friends, and the SCSS uses modules (`@use`). `color.adjust()` doesn't clamp lightness as `darken()`/`lighten()` did; the 11 calls that went past 0 % or 100 % are written as the white or black they compiled to. Every partial that writes CSS keeps its rules in a `styles` mixin that `gtk.scss` includes, because the theme `@extend`s across files and plain `@use` would cut that off. The CSS is byte-identical apart from three comments. | Fixed, medium (d3d3f4a, fef8a3d, 87b6f18) |
+| Warnings | `build.py` silenced six deprecations. It now passes `--verbose` and fails on any warning, so the next deprecation breaks the build instead of scrolling by. | Fixed (5f52b87) |
+| Light variant | `$variant` was always `dark`: 75 `if()` calls and 25 `@if` blocks had branches that never compiled. `gtk-4.0` had its own `_colors*.scss` that nothing imported. | Removed, low (1bf67ca, 635a361) |
+| Dead SCSS | 75 commented-out declarations and rules (two of them shipped in `gtk.css`) and 15 empty rules. | Removed, low (6b939fc) |
 
 ## 4. GTK correctness and assets
 
@@ -108,8 +118,11 @@ keep Pantheon's styles, and Geary and Rnote keep theirs.
 | Invisible checks | 17 image URLs led nowhere, so GTK drew nothing. In a selection-mode content view (Photos, Boxes, ...), unchecked checks and radios asked for `selection-mode-*.png`, which were never added. At scale 1 they were invisible in every state; the render shows nothing before the fix and the theme's box and circle after. Disabled-in-backdrop images were named `*-backdrop-insensitive@2.png`, but the files are `*-insensitive-backdrop@2.png`. A disabled checked GTK 3 switch at scale 2 asked for `switch-slider-on-insensitive@@.png`. Pantheon's "auto" color radio asked for an elementary image that was never shipped, so its rule is gone. | Fixed, high (7426850) |
 | Unused images | 166 files were named by no stylesheet: light, selection-mode, calendar, menu-item, pane, scale and grid images, Metacity button SVGs (they don't match the GTK buttons) and 5 GNOME Shell images. | Removed, low (18ce0cc) |
 | `gtk-dark.css` | A copy of `gtk.css`, 200 KB per GTK version. It is now `@import url("gtk.css")`. It can't go away: GTK 3 falls back to `gtk.css`, but GTK 4 leaves an app that asks for the dark variant unstyled. With `GTK_THEME=Sweet:dark`, renders are identical to the plain theme. | Fixed, low (5f1a112) |
-| Disabled tree view | The text of a selected row in a disabled tree view mixes 50 % instead of 40 % of the accent. dart-sass drops a selector that libsass kept, and the difference is barely visible. | Accepted |
-| Backdrop headerbar | A disabled suggested-action button in an unfocused GTK 3 headerbar loses its gradient, for the same reason. | Accepted |
+| Disabled tree view | The text of a selected row in a disabled tree view mixed 50 % instead of 40 % of the accent: dart-sass also lists `treeview.view:disabled:selected` in `%selected_items`'s later 50 % rule. The tree view's rule now names `.view` twice. GTK 3 and 4 render it as the libsass build did. | Fixed, low (a343a89) |
+| Backdrop headerbar | The first audit thought a disabled suggested-action button in an unfocused GTK 3 headerbar lost its gradient. That came from comparing selector text, not the cascade: rendered disabled in backdrop (a new gallery state), it is identical to the libsass build. | OK (dc6dd27) |
+| Calendar in backdrop | The new state found a third dart-sass difference: in GTK 4 the selected day, disabled in an unfocused window, was drawn in the bright backdrop color, not `%selected_items`' dim one, because sass dropped its selector from that list (`label:backdrop:disabled:selected` is in it). It has its own rule now. All six states in GTK 3 and 4 now differ from the libsass build only in the checks 7426850 added. | Fixed, low (141e047) |
+| GTK 3 nodes in GTK 4 | The GTK 4 stylesheet styled `menu`, `menuitem`, `radiobutton`, `filechooserbutton`, `assistant`, `messagedialog`, `decoration` and `toolbar`, which are CSS nodes in GTK 3 and in neither GTK 4 nor libadwaita (where `menu`, `assistant` and `messagedialog` are classes, which stay). It also used GTK 3-era type names (Granite 5 widgets, Pantheon Calculator, Noise, Snap, Shotwell, Geary's `ConversationListView`, `GtkLabel`); GTK 4 names untyped nodes `widget`. 119 selectors are gone; the rest of the stylesheet is unchanged rule by rule, and GTK 4 renders pixel-identical. | Removed, low (bcb0133) |
+| Type names in GTK 3 | The same type-name selectors stay in the GTK 3 stylesheet: GTK 3 nodes match by node name, but its legacy widget-path matcher still falls back to type names, so they aren't provably dead there. | Accepted |
 | Parse errors | GTK 3 and GTK 4 report 0 errors on their stylesheets. | OK |
 
 ## 5. GNOME Shell
@@ -127,6 +140,7 @@ keep Pantheon's styles, and Geary and Rnote keep theirs.
 | `index.theme` | It named the theme Sweet-Dark and pointed GtkTheme and MetacityTheme at a Sweet-Dark folder that no install makes. It also set an icon theme that isn't a dependency (Boston), a button layout, and the obsolete Encoding key, and the file was executable. | Fixed, medium (e2f1d1d) |
 | File modes | 48 data files were executable (images, every GTK `.scss` and `.css`, the asset SVG), and the package installed them so. Only `build.py` and `tests/compare.py` are now. | Fixed, low (a611356) |
 | Tests | There were none. `tests/compare.py` renders two revisions in private sessions and reports the pixels that differ (§8). | Fixed (f79c20c) |
+| OpenWeather | The 8 `openweather-*` classes the shell theme styles are all still in the extension (penguin-teal/gnome-openweather, its last release). That project is archived and declares GNOME 45–47 only; the rules are harmless on 51. | OK |
 | README | It said to extract a zip and set a Metacity theme. It now covers install, the build and its needs (dart-sass, not libsass), and where to edit what. | Fixed (c1a5771) |
 
 ## 7. Left open
@@ -143,20 +157,16 @@ keep Pantheon's styles, and Geary and Rnote keep theirs.
   to build this fork's `master` and run `build.py install`, and was
   test-built from the local clone with makepkg: 120 files, all 644. The rewrite
   isn't committed in those repos yet, and needs this branch pushed.
-- **Dart Sass 3.** The SCSS uses `@import` and global color functions, and
-  `build.py` silences their warnings. Moving to `@use` and `color.adjust()`
-  is needed before Dart Sass 3.
-- **GTK 4 SCSS** still styles some GTK 3-only nodes. They are harmless, since
-  GTK ignores selectors that match nothing.
-- **OpenWeather styles** (`gnome-shell/extensions/`) weren't checked against
-  the current extension.
+- **Shell renders are noisy.** Two runs of the same revision differ in window
+  placement and menu animation (thousands of pixels in some views), so shell
+  changes are judged by the CSS diff first and the renders second.
 - **Untested:** the libadwaita path (`~/.config/gtk-4.0`), Pantheon apps, Geary
   and Rnote live. The galleries cover the generic widgets those apps use.
 
 ## 8. Re-running the audit
 
 ```sh
-python3 build.py check       # CSS up to date, every image there and used
+python3 build.py check       # no sass warnings, CSS up to date, every image there and used
 python3 build.py && python3 build.py assets && git status --short   # nothing changes
 
 # GTK's own parser: prints the error count
@@ -175,5 +185,6 @@ done
 # Before/after renders: GTK 3/4 in 5 states, and GNOME Shell's main views,
 # in private headless sessions. Compare against the audit's base:
 tests/compare.py 2ada55f            # both; about 70 s
+tests/compare.py --gtk c96bc91^     # against the last libsass build: only the checks 7426850 added differ
 tests/compare.py --gtk --scale 2 HEAD
 ```

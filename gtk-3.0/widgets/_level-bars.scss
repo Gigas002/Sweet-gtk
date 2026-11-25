@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 /*************
  * Level Bar *
  *************/
@@ -17,11 +19,11 @@ levelbar {
   trough {
     padding: 3px;
     border-radius: 3px;
-    background-color: transparentize(white,0.8);
+    background-color: color.adjust(white, $alpha: -0.8);
     box-shadow: 0px 0px 1px 1px rgba(0,0,0,0.1);
 
     &:backdrop {
-      background-color: transparentize(white,0.94);
+      background-color: color.adjust(white, $alpha: -0.94);
       box-shadow: 0px 0px 1px 1px rgba(0,0,0,0.1);
     }
   }
@@ -55,7 +57,7 @@ levelbar {
     }
 
     &.empty {
-      background-color:  transparentize(black,0.65);
+      background-color:  color.adjust(black, $alpha: -0.65);
       box-shadow: none;
     }
   }

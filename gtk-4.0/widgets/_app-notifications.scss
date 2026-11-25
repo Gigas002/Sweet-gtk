@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 /*********************
  * App Notifications *
  *********************/
@@ -8,7 +10,7 @@
   padding: 10px;
   border-radius: 0 0 5px 5px;
   background-color: $osd_bg_color;
-  background-image: linear-gradient(to bottom, transparentize(black, 0.8),
+  background-image: linear-gradient(to bottom, color.adjust(black, $alpha: -0.8),
                                                transparent 2px);
   background-clip: padding-box;
 
@@ -25,7 +27,7 @@
 toast {
   
   padding: 5px;
-  background-color: lighten($base_color, 7%);
+  background-color: color.adjust($base_color, $lightness: 7%);
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.7);
   color: $fg_color;
 

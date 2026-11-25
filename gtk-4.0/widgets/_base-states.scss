@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 /***************
  * Base States *
  ***************/
@@ -26,12 +28,12 @@
 
   &:hover {
     color: $fg_color;
-    background-color: lighten($bg_color, 10%);
+    background-color: color.adjust($bg_color, $lightness: 10%);
   }
 
   &:active {
     color: $fg_color;
-    background-color: darken($bg_color, 10%);
+    background-color: color.adjust($bg_color, $lightness: -10%);
   }
 
   &:disabled {
@@ -75,14 +77,14 @@ textview {
   }
 }
 
-textview border { background-color: mix($bg_color, $base_color, 50%); }
+textview border { background-color: color.mix($bg_color, $base_color, 50%); }
 
 iconview { @extend .view; }
 
 .rubberband,
 rubberband {
-  border: 1px solid darken($selected_bg_color, 10%);
-  background-color: transparentize(darken($selected_bg_color, 10%), 0.8);
+  border: 1px solid color.adjust($selected_bg_color, $lightness: -10%);
+  background-color: color.adjust(color.adjust($selected_bg_color, $lightness: -10%), $alpha: -0.8);
 }
 
 flowbox {
@@ -181,7 +183,7 @@ window.aboutdialog image.large-icons {
   border: 1px solid #171e27;
   background-color: $osd_bg_color;
   background-clip: padding-box;
-  outline-color: transparentize($osd_fg_color, 0.7);
+  outline-color: color.adjust($osd_fg_color, $alpha: -0.7);
   text-shadow: 0 1px black;
   -gtk-icon-shadow: 0 1px black;
 

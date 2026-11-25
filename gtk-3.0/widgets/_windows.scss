@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 /**********************
  * Window Decorations *
  *********************/
@@ -9,13 +11,13 @@ decoration {
 
   // this needs to be transparent
   // see bug #722563
-  $_wm_border: transparentize($borders_color, 0.1);
-  $_wm_border_backdrop: transparentize($borders_color, 0.1);
+  $_wm_border: color.adjust($borders_color, $alpha: -0.1);
+  $_wm_border_backdrop: color.adjust($borders_color, $alpha: -0.1);
 
     // lamefun trick to get rounded borders regardless of CSD use
   border-width: 0px;
 
-  box-shadow: 0 4px 10px 2px transparentize($borders_color, 0.2);
+  box-shadow: 0 4px 10px 2px color.adjust($borders_color, $alpha: -0.2);
   // FIXME rationalize shadows
 
   // this is used for the resize cursor area
@@ -26,7 +28,7 @@ decoration {
     // change when we go to backdrop, to prevent jumping windows.
     // The biggest shadow should be in the same order then in the active state
     // or the jumping will happen during the transition.
-    box-shadow: 0 4px 10px 2px transparentize($borders_color, 0.4);
+    box-shadow: 0 4px 10px 2px color.adjust($borders_color, $alpha: -0.4);
     transition: $backdrop_transition;
   }
 
@@ -52,8 +54,8 @@ decoration {
 
   messagedialog.csd & {
     border-radius: 7px;
-    box-shadow: 0 1px 2px transparentize(black, 0.8),
-                  0 0 0 1px transparentize($_wm_border,0.1);
+    box-shadow: 0 1px 2px color.adjust(black, $alpha: -0.8),
+                  0 0 0 1px color.adjust($_wm_border, $alpha: -0.1);
   }
 
   .solid-csd & {
@@ -122,12 +124,12 @@ headerbar.selection-mode button.titlebutton,
     font-weight: normal;
     //&:hover{background-color: transparent;}
 
-    @at-root &:disabled, %selected_items_disabled { color: mix($selected_fg_color, $selected_bg_color, 50%); }
+    @at-root &:disabled, %selected_items_disabled { color: color.mix($selected_fg_color, $selected_bg_color, 50%); }
 
     @at-root &:backdrop, %selected_items_backdrop {
       color: $backdrop_selected_fg_color;
 
-      @at-root &:disabled, %selected_items_disabled:backdrop { color: mix($backdrop_selected_fg_color, $selected_bg_color, 30%); }
+      @at-root &:disabled, %selected_items_disabled:backdrop { color: color.mix($backdrop_selected_fg_color, $selected_bg_color, 30%); }
     }
   }
 }

@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 /***************
  * Popovers   *
  ***************/
@@ -5,7 +7,7 @@
 popover.background {
   padding: 2px;
   border-radius: 5px;
-  background: linear-gradient(to bottom, lighten($bg_color, 2%), darken($bg_color, 2%));
+  background: linear-gradient(to bottom, color.adjust($bg_color, $lightness: 2%), color.adjust($bg_color, $lightness: -2%));
 
   .csd &, & { border: 1px solid $borders_color; }
 
@@ -28,7 +30,7 @@ popover.background {
     &.magnifier {
       @extend %osd;
 
-      border: 1px solid transparentize(white, 0.9);
+      border: 1px solid color.adjust(white, $alpha: -0.9);
 
       button { @extend %osd_button };
     }

@@ -67,15 +67,11 @@ INSTALL = [
     "gnome-shell/assets",
 ]
 
-# Deprecations the SCSS is known to use (@import, global color functions, ...). They become
+# Deprecations the SCSS is known to use (@import). They become
 # errors in Dart Sass 3; until the SCSS moves to modules they are only noise. Anything else
 # sass reports still shows.
 KNOWN_DEPRECATIONS = [
     "import",
-    "global-builtin",
-    "color-functions",
-    "strict-unary",
-    "slash-div",
 ]
 
 

@@ -1,3 +1,6 @@
+@use 'sass:color';
+@use 'sass:math';
+
 /*****************
 * Drawing mixins *
 *****************/
@@ -9,7 +12,7 @@
   $depth3: inset 0 1px 1px rgba(0, 0, 0, 0.06);
   $depth4: inset 0 1px 2px rgba(0, 0, 0, 0.10);
   $depth5: inset 0 1px 2px rgba(0, 0, 0, 0.15);
-  $depth6: 0 2px 4px 2px transparentize(black, 0.8);
+  $depth6: 0 2px 4px 2px color.adjust(black, $alpha: -0.8);
 
 // generic drawing of more complex things
 
@@ -50,17 +53,17 @@
 //
 
   @if $t==normal {
-    background-color: lighten($base_color, 5%);
+    background-color: color.adjust($base_color, $lightness: 5%);
     border-color: $borders_color;
  
     @include _shadows($depth);
 
   }
   @if $t==focus { 
-    border-color: transparentize($selected_bg_color, 0.4); 
+    border-color: color.adjust($selected_bg_color, $alpha: -0.4); 
     box-shadow: none !important;
   }
-  @if $t==hover { border-color: transparentize($selected_bg_color, 0.4); }
+  @if $t==hover { border-color: color.adjust($selected_bg_color, $alpha: -0.4); }
   @if $t==insensitive {
     color: $insensitive_fg_color;
     box-shadow: $depth;
@@ -69,7 +72,7 @@
 
 // buttons
 
-@function _border_color ($c) { @return darken($c,25%); } // colored buttons want
+@function _border_color ($c) { @return color.adjust($c, $lightness: -25%); } // colored buttons want
                                                          // the border form the
                                                          // base color
 
@@ -80,9 +83,9 @@
 // $tc is the text color
 // $bg is the background color
 //
-  $_lbg: lightness($bg)/100%;
-  @if lightness($tc)<50% { @return transparentize(white,1-$_lbg/($_lbg*1.3)); }
-  @else { @return transparentize(black,$_lbg*0.8); }
+  $_lbg: math.div(color.channel($bg, "lightness", $space: hsl), 100%);
+  @if color.channel($tc, "lightness", $space: hsl)<50% { @return color.adjust(white, $alpha: -(1 - math.div($_lbg, $_lbg * 1.3))); }
+  @else { @return color.adjust(black, $alpha: -($_lbg*0.8)); }
 }
 
 @function _button_hilight_color($c) {
@@ -91,11 +94,11 @@
 //
 // $c: base color;
 //
-  @if lightness($c)>90% { @return white; }
-  @else if lightness($c)>80% { @return transparentize(white, 0.3); }
-  @else if lightness($c)>50% { @return transparentize(white, 0.5); }
-  @else if lightness($c)>40% { @return transparentize(white, 0.7); }
-  @else { @return transparentize(white, 0.9); }
+  @if color.channel($c, "lightness", $space: hsl)>90% { @return white; }
+  @else if color.channel($c, "lightness", $space: hsl)>80% { @return color.adjust(white, $alpha: -0.3); }
+  @else if color.channel($c, "lightness", $space: hsl)>50% { @return color.adjust(white, $alpha: -0.5); }
+  @else if color.channel($c, "lightness", $space: hsl)>40% { @return color.adjust(white, $alpha: -0.7); }
+  @else { @return color.adjust(white, $alpha: -0.9); }
 }
 
 @mixin _button_text_shadow ($tc:$fg_color, $bg:$bg_color) {
@@ -109,7 +112,7 @@
 
   $_shadow: _text_shadow_color($tc, $bg);
 
-  @if lightness($tc)<50% {
+  @if color.channel($tc, "lightness", $space: hsl)<50% {
     text-shadow: 0 1px $_shadow;
     icon-shadow: 0 1px $_shadow;
   }
@@ -137,7 +140,7 @@
 
   $_hilight_color: _button_hilight_color($c);
   $_button_edge: if(sass($edge == none): none; else: _widget_edge($edge));
-  $_blank_edge: if(sass($edge == none): none; else: _widget_edge(transparentize($edge,1)));
+  $_blank_edge: if(sass($edge == none): none; else: _widget_edge(color.adjust($edge, $alpha: -1)));
 
 
   @if $t==normal {
@@ -146,7 +149,7 @@
   //
 
     color: $fg_color;
-    background-color: lighten($base_color, 4%);
+    background-color: color.adjust($base_color, $lightness: 4%);
     box-shadow: none;
     border: 1px solid $borders_color;
     border: 1px solid $borders_color;
@@ -155,10 +158,10 @@
   //
   // focused button
   //
-    $_bg: if(sass($c!=$osd_bg_color): transparentize($c, 0.5);
+    $_bg: if(sass($c!=$osd_bg_color): color.adjust($c, $alpha: -0.5);
                           else: $osd_bg_color);
 
-    background-color: lighten($base_color, 8%);
+    background-color: color.adjust($base_color, $lightness: 8%);
     color: $selected_fg_color;
     box-shadow: none !important;
     border: 1px solid $borders_color;
@@ -168,10 +171,10 @@
   //
   // active osd button
   //
-    $_bg: if(sass($c!=$osd_bg_color): transparentize($c, 0.3);
-                            else: lighten($main_dark, 2%));
+    $_bg: if(sass($c!=$osd_bg_color): color.adjust($c, $alpha: -0.3);
+                            else: color.adjust($main_dark, $lightness: 2%));
 
-    background-color: lighten($base_color, 7%);
+    background-color: color.adjust($base_color, $lightness: 7%);
     color: $selected_fg_color;
     border: 1px solid $borders_color;
   }
@@ -194,7 +197,7 @@
   //
   // insensitive osd button
   //
-    $_bg: transparentize(mix($insensitive_fg_color,$osd_bg_color,20%),0.3);
+    $_bg: color.adjust(color.mix($insensitive_fg_color,$osd_bg_color,20%), $alpha: -0.3);
 
     color: $insensitive_fg_color;
     background-color: $_bg;
@@ -211,7 +214,7 @@
     background-color: transparent;
     background-image: none;
 
-    @include _shadows(inset 0 1px transparentize(white,1),
+    @include _shadows(inset 0 1px color.adjust(white, $alpha: -1),
                       $_blank_edge);
 
     text-shadow: none;

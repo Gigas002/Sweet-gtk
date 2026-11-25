@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 /*********
  * Menus *
  *********/
@@ -7,7 +9,7 @@ menubar,
   color: $headerbar_fg_color;
   -GtkWidget-window-dragging: true;
   padding: 0px;
-  box-shadow: inset 0 -1px transparentize(black, 0.9);
+  box-shadow: inset 0 -1px color.adjust(black, $alpha: -0.9);
 
   > menuitem {
     min-height: 16px;
@@ -30,7 +32,7 @@ menu,
   font: initial;
   margin: 4px;
   padding: 2px 0px;
-  background: linear-gradient(to bottom, lighten($bg_color, 2%), darken($bg_color, 2%));
+  background: linear-gradient(to bottom, color.adjust($bg_color, $lightness: 2%), color.adjust($bg_color, $lightness: -2%));
   border: 1px solid $borders_color; // adds borders in a non composited env
   border-radius: 5px;
 

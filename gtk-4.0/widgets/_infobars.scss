@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 /**************
  * GtkInfoBar *
  **************/
@@ -6,7 +8,7 @@
    text-shadow: none;
    color: $fg_color;
    background-color: $bg_color;
-   border-bottom:1px solid darken($bg_color,10%);
+   border-bottom:1px solid color.adjust($bg_color, $lightness: -10%);
    box-shadow: none;
  
  }
@@ -30,9 +32,9 @@
    button {
      border-radius: 2px;
      border: none;
-     background: transparentize($base_color, 0.02);
+     background: color.adjust($base_color, $alpha: -0.02);
      color: $fg_color;
-     box-shadow: 0 1px 0 0 transparentize(black, 0.8);
+     box-shadow: 0 1px 0 0 color.adjust(black, $alpha: -0.8);
  
      .label {
        color: $fg_color;
@@ -42,35 +44,35 @@
        background: $base_color;
        color: $fg_color;
  
-       box-shadow: 0 1px 2px 0 transparentize(black, 0.6);
+       box-shadow: 0 1px 2px 0 color.adjust(black, $alpha: -0.6);
  
        &:backdrop {
-         background: transparentize($base_color, 0.2);
-         color: transparentize($fg_color, 0.5);
+         background: color.adjust($base_color, $alpha: -0.2);
+         color: color.adjust($fg_color, $alpha: -0.5);
          box-shadow: none;
        }
      }
  
      &:hover,
      &:focus {
-       box-shadow: 0 1px 2px 0 transparentize(black, 0.6);
+       box-shadow: 0 1px 2px 0 color.adjust(black, $alpha: -0.6);
      }
  
      &:disabled {
-       background: transparentize($base_color, 0.4);
-       color: transparentize($fg_color, 0.5);
+       background: color.adjust($base_color, $alpha: -0.4);
+       color: color.adjust($fg_color, $alpha: -0.5);
        box-shadow: none;
  
          &:backdrop {
-           background: transparentize($base_color, 0.5);
-           color: transparentize($fg_color, 0.5);
+           background: color.adjust($base_color, $alpha: -0.5);
+           color: color.adjust($fg_color, $alpha: -0.5);
            box-shadow: none;
          }
      }
  
      &:backdrop {
-       background: transparentize($base_color, 0.2);
-       color: transparentize($fg_color, 0.5);
+       background: color.adjust($base_color, $alpha: -0.2);
+       color: color.adjust($fg_color, $alpha: -0.5);
        box-shadow: none;
      }
    }
@@ -120,12 +122,12 @@
   color: $fg_color;
   button.suggested-action {
     @include button(undecorated);
-    background-color: transparentize(#000, 0.5);
+    background-color: color.adjust(#000, $alpha: -0.5);
     &:hover, &:active {
-      background-color: transparentize(#000, 0.3);
+      background-color: color.adjust(#000, $alpha: -0.3);
     }
     &:backdrop {
-      background-color: transparentize(#000, 0.7);
+      background-color: color.adjust(#000, $alpha: -0.7);
     }
   }
 }

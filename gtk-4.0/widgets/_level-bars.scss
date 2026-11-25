@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 $_levelbar_size: 5px;
 $_levelbar_border_radius: 5px;
 
@@ -73,8 +75,8 @@ levelbar {
     }
 
     &.empty {
-      background-color: lighten($base_color, 10%);
-      border-color: lighten($base_color, 10%);
+      background-color: color.adjust($base_color, $lightness: 10%);
+      border-color: color.adjust($base_color, $lightness: 10%);
     }
   }
 }

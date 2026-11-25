@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 /**********************
  * Window Decorations *
  *********************/
@@ -7,13 +9,13 @@
 
   // this needs to be transparent
   // see bug #722563
-  $_wm_border: transparentize(black, 0.25);
-  $_wm_border_backdrop: transparentize(black, 0.25);
+  $_wm_border: color.adjust(black, $alpha: -0.25);
+  $_wm_border_backdrop: color.adjust(black, $alpha: -0.25);
   $_window_radius: 4px;
   $_menu_radius: 7px;
 
   &.csd {
-    box-shadow: 0 3px 9px 1px transparentize(black, 0.5),
+    box-shadow: 0 3px 9px 1px color.adjust(black, $alpha: -0.5),
                 0 0 0 1px $_wm_border; //doing borders with box-shadow
     margin: 0px;
     border-radius: $_window_radius $_window_radius 0 0;
@@ -23,21 +25,21 @@
       // The biggest shadow should be in the same order then in the active state
       // or the jumping will happen during the transition.
       box-shadow: 0 3px 9px 1px transparent,
-                  0 2px 6px 2px transparentize(black, 0.8),
+                  0 2px 6px 2px color.adjust(black, $alpha: -0.8),
                   0 0 0 1px $_wm_border_backdrop;
       transition: $backdrop_transition;
     }
 
     &.popup {
       border-radius: $_menu_radius;
-      box-shadow: 0 1px 2px transparentize(black, 0.8),
-                  0 0 0 1px transparentize($_wm_border, 0.1);
+      box-shadow: 0 1px 2px color.adjust(black, $alpha: -0.8),
+                  0 0 0 1px color.adjust($_wm_border, $alpha: -0.1);
     }
 
     &.dialog.message {
       border-radius: $_window_radius;
-      box-shadow: 0 1px 2px transparentize(black, 0.8),
-                  0 0 0 1px transparentize($_wm_border, 0.1);
+      box-shadow: 0 1px 2px color.adjust(black, $alpha: -0.8),
+                  0 0 0 1px color.adjust($_wm_border, $alpha: -0.1);
     }
   }
 
@@ -46,9 +48,9 @@
     padding: 4px;
     border: solid 1px $borders_color;
     border-radius: 0;
-    box-shadow: inset 0 0 0 4px $borders_color, inset 0 0 0 3px $headerbar_color, inset 0 1px transparentize($fg_color, 0.93);
+    box-shadow: inset 0 0 0 4px $borders_color, inset 0 0 0 3px $headerbar_color, inset 0 1px color.adjust($fg_color, $alpha: -0.93);
 
-    &:backdrop { box-shadow: inset 0 0 0 4px $borders_color, inset 0 0 0 3px $backdrop_bg_color, inset 0 1px transparentize($fg_color, 0.93); }
+    &:backdrop { box-shadow: inset 0 0 0 4px $borders_color, inset 0 0 0 3px $backdrop_bg_color, inset 0 1px color.adjust($fg_color, $alpha: -0.93); }
   }
 
   &.maximized,
@@ -147,12 +149,12 @@ headerbar.selection-mode button.titlebutton,
     font-weight: normal;
     //&:hover{background-color: transparent;}
 
-    @at-root &:disabled, %selected_items_disabled { color: mix($selected_fg_color, $selected_bg_color, 50%); }
+    @at-root &:disabled, %selected_items_disabled { color: color.mix($selected_fg_color, $selected_bg_color, 50%); }
 
     @at-root &:backdrop, %selected_items_backdrop {
       color: $backdrop_selected_fg_color;
 
-      @at-root &:disabled, %selected_items_disabled:backdrop { color: mix($backdrop_selected_fg_color, $selected_bg_color, 30%); }
+      @at-root &:disabled, %selected_items_disabled:backdrop { color: color.mix($backdrop_selected_fg_color, $selected_bg_color, 30%); }
     }
   }
 }

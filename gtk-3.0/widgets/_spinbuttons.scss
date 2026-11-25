@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 /*****************
  * GtkSpinButton *
  *****************/
@@ -26,10 +28,10 @@ spinbutton {
       margin: 0;
       padding-bottom: 0;
       padding-top: 0;
-      color: mix($fg_color, $base_color, 90%);
+      color: color.mix($fg_color, $base_color, 90%);
       background-image: none;
       border-style: none none none solid;
-      border-color: transparentize($borders_color, 0.7);
+      border-color: color.adjust($borders_color, $alpha: -0.7);
       border-radius: 0;
       box-shadow: inset 1px 0px 0px 0px rgba(0,0,0,0.07);
 
@@ -40,22 +42,22 @@ spinbutton {
         background-color: $base_hover_color;
       }
 
-      &:disabled { color: transparentize($insensitive_fg_color, 0.7); }
+      &:disabled { color: color.adjust($insensitive_fg_color, $alpha: -0.7); }
 
       &:active {
-        background-color: transparentize(black, 0.9);
-        box-shadow: inset 0 2px 3px -1px transparentize(black, 0.8);
+        background-color: color.adjust(black, $alpha: -0.9);
+        box-shadow: inset 0 2px 3px -1px color.adjust(black, $alpha: -0.8);
       }
 
       &:backdrop {
-        color: mix($backdrop_fg_color, $backdrop_base_color, 90%);
+        color: color.mix($backdrop_fg_color, $backdrop_base_color, 90%);
         background-color: transparent;
-        border-color: transparentize($backdrop_borders_color, 0.7);
+        border-color: color.adjust($backdrop_borders_color, $alpha: -0.7);
         transition: $backdrop_transition;
       }
 
       &:backdrop:disabled {
-        color: transparentize($backdrop_insensitive_color,0.7);
+        color: color.adjust($backdrop_insensitive_color, $alpha: -0.7);
         background-image: none;
         border-style: none none none solid; // It is needed or it gets overridden
         box-shadow: inset 1px 0px 0px 0px rgba(0,0,0,0.07);
@@ -77,7 +79,7 @@ spinbutton {
 
       color: $osd_fg_color;
       border-style: none none none solid;
-      border-color: transparentize($osd_borders_color, 0.3);
+      border-color: color.adjust($osd_borders_color, $alpha: -0.3);
       border-radius: 0;
       box-shadow: none;
       -gtk-icon-shadow: 0 1px black;
@@ -88,8 +90,8 @@ spinbutton {
         @include button(undecorated);
 
         color: $osd_fg_color;
-        border-color: transparentize(opacify($osd_borders_color, 1), 0.5);
-        background-color: transparentize($osd_fg_color, 0.9);
+        border-color: color.adjust(color.adjust($osd_borders_color, $alpha: 1), $alpha: -0.5);
+        background-color: color.adjust($osd_fg_color, $alpha: -0.9);
         -gtk-icon-shadow: 0 1px black;
         box-shadow: none;
       }
@@ -98,7 +100,7 @@ spinbutton {
         @include button(undecorated);
 
         color: $osd_fg_color;
-        border-color: transparentize(opacify($osd_borders_color, 1), 0.5);
+        border-color: color.adjust(color.adjust($osd_borders_color, $alpha: 1), $alpha: -0.5);
         -gtk-icon-shadow: none;
         box-shadow: none;
       }
@@ -107,7 +109,7 @@ spinbutton {
         @include button(undecorated);
 
         color: $osd_insensitive_fg_color;
-        border-color: transparentize(opacify($osd_borders_color, 1), 0.5);
+        border-color: color.adjust(color.adjust($osd_borders_color, $alpha: 1), $alpha: -0.5);
         -gtk-icon-shadow: none;
         box-shadow: none;
       }

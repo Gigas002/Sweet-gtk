@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 /**********
  * Frames *
  **********/
@@ -83,5 +85,5 @@ scrolledwindow {
 
 //vbox and hbox separators
 separator {
-  background: transparentize(black, 0.9);
+  background: color.adjust(black, $alpha: -0.9);
 }

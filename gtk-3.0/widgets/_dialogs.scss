@@ -1,14 +1,16 @@
+@use 'sass:color';
+
 /***********
  * Dialogs *
  ***********/
 messagedialog { // Message Dialog styling
   .titlebar:not(headerbar) {
-    background-color: transparentize($bg_color, 0.05);
+    background-color: color.adjust($bg_color, $alpha: -0.05);
   }
   .titlebar {
     min-height: 20px;
     background-image: none;
-    background-color: transparentize($bg_color, 0.05);
+    background-color: color.adjust($bg_color, $alpha: -0.05);
     border-style: none;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
@@ -16,7 +18,7 @@ messagedialog { // Message Dialog styling
 
   &.csd { // rounded bottom border styling for csd version
     &.background {
-      background-color: transparentize($bg_color, 0.05);
+      background-color: color.adjust($bg_color, $alpha: -0.05);
       color: $fg_color;
 
       // bigger radius for better antialiasing
@@ -35,7 +37,7 @@ messagedialog { // Message Dialog styling
       box-shadow: none;
 
       &:hover {
-        background-color: transparentize($selected_bg_color, 0.1);
+        background-color: color.adjust($selected_bg_color, $alpha: -0.1);
         color: white;
       }
 

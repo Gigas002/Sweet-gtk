@@ -1,10 +1,12 @@
+@use 'sass:color';
+
 /***********
  * Sidebar *
  ***********/
 .sidebar {
   border-style: none;
   border-width: 0;
-  background-color: mix($bg_color, $base_color, 50%);
+  background-color: color.mix($bg_color, $base_color, 50%);
 
   .frame{
     border: none;
@@ -64,15 +66,15 @@
         &:selected {
           background-color: $selected_bg_color;
           color: $selected_fg_color;
-          &:active { box-shadow: inset 0 2px 3px -1px transparentize(black, 0.5); }
+          &:active { box-shadow: inset 0 2px 3px -1px color.adjust(black, $alpha: -0.5); }
     
           &.has-open-popup,
-          &:hover { background-color: transparentize($selected_bg_color, 0.1); }
+          &:hover { background-color: color.adjust($selected_bg_color, $alpha: -0.1); }
     
           &:backdrop { background-color: $backdrop_selected_bg_color; }
         }
         &:hover, iconview.source-list:hover { 
-            background-color: transparentize(black, 0.87); 
+            background-color: color.adjust(black, $alpha: -0.87); 
         }
       }
     }
@@ -139,7 +141,7 @@ placessidebar{
 					transition: all 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
 					color: rgba(0,0,0,0.76);
 					background-color: transparent; /*rgba(65,67,75,0.4); */
-					background-image:linear-gradient(to right, lighten(#171e27, 2%) 40px, lighten($_sidebar_color, 5%) 40px, lighten($_sidebar_color, 5%) 97%);
+					background-image:linear-gradient(to right, color.adjust(#171e27, $lightness: 2%) 40px, color.adjust($_sidebar_color, $lightness: 5%) 40px, color.adjust($_sidebar_color, $lightness: 5%) 97%);
 				}
 
 				&:active{
@@ -156,7 +158,7 @@ placessidebar{
 																rgba(65,67,75,0) 36px, rgba(65,67,75,0)97%);
 					&:hover{
 						color: #ffffff;
-						background-color: lighten($_sidebar_color, 5%);
+						background-color: color.adjust($_sidebar_color, $lightness: 5%);
 						.sidebar-icon {
 							color: #ffffff;
 						}
@@ -169,12 +171,12 @@ placessidebar{
 
             .sidebar-icon {
               color: $backdrop_selected_fg_color;
-              -gtk-icon-shadow: 0 1px transparentize($backdrop_selected_fg_color, 0.2);
+              -gtk-icon-shadow: 0 1px color.adjust($backdrop_selected_fg_color, $alpha: -0.2);
             }
           }
 
 					.sidebar-icon {
-						-gtk-icon-shadow: 0 1px transparentize(#fff, 0.2);
+						-gtk-icon-shadow: 0 1px color.adjust(#fff, $alpha: -0.2);
 						color: inherit; 
 					}
 				}

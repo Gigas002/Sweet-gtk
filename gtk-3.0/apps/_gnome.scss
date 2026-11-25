@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 /************
  * Nautilus *
  ************/
@@ -26,31 +28,31 @@
     .list-row {
       button {
         border: none;
-        background-color: transparentize(darken($base_color,3%),0.05);
+        background-color: color.adjust(color.adjust($base_color, $lightness: -3%), $alpha: -0.05);
         &:active {
-          background-color: transparentize($selected_bg_color,0.25);
+          background-color: color.adjust($selected_bg_color, $alpha: -0.25);
         }
       }
 
       &:selected {
-        background-color: transparentize($selected_bg_color,0.25);
+        background-color: color.adjust($selected_bg_color, $alpha: -0.25);
         &:hover {
-          background-color: transparentize($selected_bg_color,0.1);
+          background-color: color.adjust($selected_bg_color, $alpha: -0.1);
         }
       }
 
       &:hover {
-        background-color: transparentize($base_color,0.5);
+        background-color: color.adjust($base_color, $alpha: -0.5);
         &:active {
-          background-color: transparentize($selected_bg_color,0.1);
+          background-color: color.adjust($selected_bg_color, $alpha: -0.1);
         }
       }
     }
   }
   &.background {
-    background-color: transparentize(darken($base_color,3%),0.05);
+    background-color: color.adjust(color.adjust($base_color, $lightness: -3%), $alpha: -0.05);
     &:backdrop {
-      background-color: transparentize(darken($base_color,3%),0.05);
+      background-color: color.adjust(color.adjust($base_color, $lightness: -3%), $alpha: -0.05);
     }
   }
 
@@ -88,7 +90,7 @@
           @include button(active-header);
           &:backdrop{
             &, label{
-              color: darken(rgb(255, 255, 255), 4%);
+              color: color.adjust(rgb(255, 255, 255), $lightness: -4%);
             }
           }
       }
@@ -131,7 +133,7 @@
     border-radius: 10px;
     margin-right: 5px;
     &:focus {
-      border-color: transparentize($selected_bg_color, 0.4);
+      border-color: color.adjust($selected_bg_color, $alpha: -0.4);
     }
   }
 }
@@ -146,17 +148,17 @@
 
   .unknown {
     background-color: #888a85;
-    border-color: darken(#888a85, 20%);
+    border-color: color.adjust(#888a85, $lightness: -20%);
   }
 
   .used {
     background-color: #9FB0B9;
-    border-color: darken(#9FB0B9, 20%);
+    border-color: color.adjust(#9FB0B9, $lightness: -20%);
   }
 
   .free {
     background-color: #D8D8D8;
-    border-color: darken(#D8D8D8, 20%);
+    border-color: color.adjust(#D8D8D8, $lightness: -20%);
   }
 }
 
@@ -167,7 +169,7 @@
   .nautilus-canvas-item {
     border-radius: 5px;
     color: $selected_fg_color;
-    text-shadow: 1px 1px transparentize(black, 0.4);
+    text-shadow: 1px 1px color.adjust(black, $alpha: -0.4);
 
     &:active {
       color: $fg_color;

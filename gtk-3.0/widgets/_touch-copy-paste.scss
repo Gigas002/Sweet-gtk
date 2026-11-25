@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 /**********************
  * Touch Copy & Paste *
  *********************/
@@ -56,7 +58,7 @@ button.circular { // FIXME: aggregate to buttons
   border: 1px solid;
   border-color: $borders_color;
   border-radius: 5px;
-  box-shadow: inset 0 -3px mix($borders_color, $base_color, 60%);
+  box-shadow: inset 0 -3px color.mix($borders_color, $base_color, 60%);
   font-size: smaller;
 
   &:backdrop {

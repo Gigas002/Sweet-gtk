@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 /************
  * Calendar *
  ***********/
@@ -12,16 +14,16 @@ calendar {
   }
 
   &.header {
-    border-bottom: 1px solid transparentize(black, 0.9);
+    border-bottom: 1px solid color.adjust(black, $alpha: -0.9);
     border-radius: 0;
 
-    &:backdrop { border-color: transparentize(black, 0.9); }
+    &:backdrop { border-color: color.adjust(black, $alpha: -0.9); }
   }
 
   &.button {
     @extend %undecorated_button;
 
-    color: transparentize($fg_color, 0.55);
+    color: color.adjust($fg_color, $alpha: -0.55);
 
     &:hover {
       @extend %undecorated_button;
@@ -32,13 +34,13 @@ calendar {
     &:backdrop {
       @extend %undecorated_button;
 
-      color: transparentize($backdrop_fg_color,0.55);
+      color: color.adjust($backdrop_fg_color, $alpha: -0.55);
     }
 
     &:disabled {
       @extend %undecorated_button;
 
-      color:  transparentize($insensitive_fg_color,0.55);
+      color:  color.adjust($insensitive_fg_color, $alpha: -0.55);
     }
   }
 

@@ -2,8 +2,7 @@
  * Buttons *
  ***********/
 // stuff for .needs-attention
-$_dot_color: if($variant=='light', $selected_bg_color,
-                                   lighten($selected_bg_color,15%));
+$_dot_color: lighten($selected_bg_color,15%);
 @keyframes needs_attention {
   from { background-image: radial-gradient(farthest-side, $_dot_color 0%, transparentize($_dot_color, 1) 0%); }
   to { background-image: radial-gradient(farthest-side, $_dot_color 95%, transparentize($_dot_color, 1)); }
@@ -127,13 +126,12 @@ button {
 
   @at-root %button_selected, & {
     row:selected & {
-      @if $variant == 'light' { border-color: $selected_borders_color; }
 
       &.flat:not(:active):not(:checked):not(:hover):not(disabled) {
         color: $selected_fg_color;
         border-color: transparent;
 
-        &:backdrop { color: if($variant=='light', $backdrop_base_color, $backdrop_fg_color); }
+        &:backdrop { color: $backdrop_fg_color; }
       }
     }
   }
@@ -381,21 +379,17 @@ button {
 %needs_attention {
   animation: needs_attention 150ms ease-in;
   $_dot_shadow: _text_shadow_color();
-  $_dot_shadow_r: if($variant=='light',0.5,0.45);
+  $_dot_shadow_r: 0.45;
   background-image: radial-gradient(farthest-side, $_dot_color 96%, transparentize($_dot_color,1 ));
   background-size: 6px 6px, 6px 6px;
   background-repeat: no-repeat;
 
-  @if $variant == 'light' { background-position: right 3px, right 4px; }
-
-  @else { background-position: right 3px, right 2px; }
+  background-position: right 3px, right 2px;
 
   &:backdrop { background-size: 6px 6px, 0 0;}
 
   &:dir(rtl) {
-    @if $variant == 'light' { background-position: left 3px, left 4px; }
-
-    @else { background-position: left 3px, left 2px; }
+    background-position: left 3px, left 2px;
   }
 }
 
@@ -527,12 +521,6 @@ button.color {
   colorswatch:only-child {
     &, overlay { border-radius: 0; }
 
-    @if $variant == 'light' {
-      box-shadow: none;
-
-      &:disabled,
-      &:backdrop { box-shadow: none; }
-    }
   }
 }
 

@@ -65,7 +65,7 @@ scrollbar {
         min-width: 3px;
         min-height: 3px;
         background-color: $fg_color;
-        border: 1px solid if($variant == 'light', white, black);
+        border: 1px solid black;
       }
 
       button {
@@ -74,7 +74,7 @@ scrollbar {
         background-color: $fg_color;
         background-clip: padding-box;
         border-radius: 100%;
-        border: 1px solid if($variant == 'light', white, black);
+        border: 1px solid black;
         -gtk-icon-source: none;
       }
 

@@ -151,7 +151,7 @@ scale {
     }
   }
 
-  $_scale_bg: if($variant == 'light', #fff, $bg_color);
+  $_scale_bg: $bg_color;
   $_scale_disabled_bg: lighten($_scale_bg, 5%);
 
   slider {
@@ -289,7 +289,7 @@ scale {
   // *WARNING* scale with marks madness following
 
   // FIXME: OSD and selected list rows missing, I don't feel like adding the other 144 assets needed for those...
-  $suffix: if($variant == 'light', '', '-dark');
+  $suffix: '-dark';
 
   @each $dir_class, $dir_infix in ('horizontal', 'horz'),
                                   ('vertical', 'vert') {

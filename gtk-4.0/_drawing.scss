@@ -36,18 +36,14 @@
 // entries
 
 @function entry_focus_border($fc:$selected_bg_color) {
-  @if $variant == 'light' { @return $fc; }
-  @else { @return if($fc==$selected_bg_color, $selected_borders_color, darken($fc, 35%)); }
+  @return if($fc==$selected_bg_color, $selected_borders_color, darken($fc, 35%));
 }
 
 
 @function entry_gradient($c) {
-  @if $variant=='light' { @return linear-gradient(to bottom, mix($borders_color, $c, 45%),
-                                                             mix($borders_color, $c, 3%) 2px,
-                                                             $c 90%); }
-  @else { @return linear-gradient(to bottom, mix($borders_color, $c, 95%),
+  @return linear-gradient(to bottom, mix($borders_color, $c, 95%),
                                              mix($borders_color, $c, 40%) 3px,
-                                             $c 90%); }
+                                             $c 90%);
 }
 
 @mixin entry($t, $fc:$selected_bg_color, $edge: none) {
@@ -476,7 +472,7 @@ box-shadow: none;
 //
   $gradient: linear-gradient(to top, darken($c, 13%), darken($c, 2%) 2px, $c 3px);
 
-  @if $variant == 'dark' { $gradient: linear-gradient(to top, darken($c, 3%), darken($c, 1%) 2px, $c 3px); }
+  $gradient: linear-gradient(to top, darken($c, 3%), darken($c, 1%) 2px, $c 3px);
 
   @if $ov != none { background: $c $ov, $gradient; }
   @else { background: $c $gradient; }

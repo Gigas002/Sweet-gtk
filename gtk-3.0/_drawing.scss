@@ -36,7 +36,7 @@
 // entries
 
 @function entry_focus_border($fc:$selected_bg_color) {
-  @return if($fc==$selected_bg_color, $selected_borders_color, darken($fc, 35%));
+  @return if(sass($fc==$selected_bg_color): $selected_borders_color; else: darken($fc, 35%));
 }
 
 
@@ -59,8 +59,8 @@
 // normal, focus, insensitive, backdrop, backdrop-insensitive, osd, osd-focus, osd-backdrop;
 //
 
-  $_blank_edge: if($edge == none, none, 0 1px transparentize($edge, 1));
-  $_entry_edge: if($edge == none, none, _widget_edge($edge));
+  $_blank_edge: if(sass($edge == none): none; else: 0 1px transparentize($edge, 1));
+  $_entry_edge: if(sass($edge == none): none; else: _widget_edge($edge));
 
   @if $t==normal {
     color: $text_color;
@@ -195,8 +195,8 @@
 //
 
   $_hilight_color: _button_hilight_color($c);
-  $_button_edge: if($edge == none, none, _widget_edge($edge));
-  $_blank_edge: if($edge == none, none, _widget_edge(transparentize($edge,1)));
+  $_button_edge: if(sass($edge == none): none; else: _widget_edge($edge));
+  $_blank_edge: if(sass($edge == none): none; else: _widget_edge(transparentize($edge,1)));
 
 
   @if $t==rounded {
@@ -241,7 +241,7 @@
   //
   // normal button headerbar look
   //
-  color: if($tc==$text_color, #8b8b8b, $tc);
+  color: if(sass($tc==$text_color): #8b8b8b; else: $tc);
   text-shadow: none;
   box-shadow: none;
   background: transparent;
@@ -252,7 +252,7 @@
   //
   // hovered button headerbar look
   //
-  color: if($tc==$text_color, $selected_bg_color, $tc);
+  color: if(sass($tc==$text_color): $selected_bg_color; else: $tc);
   border-radius: 0;
   text-shadow: none;
   border:none;
@@ -269,7 +269,7 @@
 //
 // backdrop button headerbar look
 //
-color: if($tc==$text_color, transparentize($tc, 0.6), $tc);
+color: if(sass($tc==$text_color): transparentize($tc, 0.6); else: $tc);
 background-color: transparent;
 border-radius: 0;
 text-shadow: none;
@@ -283,16 +283,16 @@ box-shadow: none;
   //
   color: $tc;
   outline-color: transparentize($tc, 0.7);
-  background-color: if($c==$base_color, $selected_bg_color, $c);
+  background-color: if(sass($c==$base_color): $selected_bg_color; else: $c);
   text-shadow: none;
 }
   @else if $t==insensitive {
   //
   // insensitive button
   //
-  color: if($tc==$text_color, $backdrop_text_color, $tc);
+  color: if(sass($tc==$text_color): $backdrop_text_color; else: $tc);
   outline-color: transparentize($tc, 0.7);
-  background-color: if($c==$base_color, $insensitive_bg_color, $c);
+  background-color: if(sass($c==$base_color): $insensitive_bg_color; else: $c);
   text-shadow: none;
 }
   @else if $t==insensitive-active {
@@ -301,7 +301,7 @@ box-shadow: none;
   //
   color: transparentize($selected_fg_color, 0.3);
   outline-color: transparentize($tc, 0.7);
-  background-color: if($c==$base_color, $selected_bg_color, $c);
+  background-color: if(sass($c==$base_color): $selected_bg_color; else: $c);
   text-shadow: none;
   label { color: transparentize($selected_fg_color, 0.3); }
 }
@@ -309,9 +309,9 @@ box-shadow: none;
   //
   // backdrop button
   //
-  color: if($tc==$text_color, $backdrop_text_color, transparentize($tc, 0.6));
+  color: if(sass($tc==$text_color): $backdrop_text_color; else: transparentize($tc, 0.6));
   outline-color: transparentize($tc, 0.7);
-  background-color: if($c==$base_color, $backdrop_base_color, $c);
+  background-color: if(sass($c==$base_color): $backdrop_base_color; else: $c);
   text-shadow: none;
 }
 
@@ -330,9 +330,9 @@ box-shadow: none;
   //
   // backdrop insensitive button
   //
-  color: if($tc==$text_color, $backdrop_text_color, $tc);
+  color: if(sass($tc==$text_color): $backdrop_text_color; else: $tc);
   outline-color: transparentize($tc, 0.7);
-  background-color: if($c==$base_color, $insensitive_bg_color, $c);
+  background-color: if(sass($c==$base_color): $insensitive_bg_color; else: $c);
   text-shadow: none;
 }
 
@@ -350,8 +350,8 @@ box-shadow: none;
   //
   // normal osd button
   //
-    $_bg: if($c!=$base_color, transparentize($c, 0.5),
-                            $osd_bg_color);
+    $_bg: if(sass($c!=$base_color): transparentize($c, 0.5);
+                            else: $osd_bg_color);
 
     color: $osd_fg_color;
     border-color: $osd_borders_color;
@@ -366,8 +366,8 @@ box-shadow: none;
   //
   // active osd button
   //
-    $_bg: if($c!=$base_color, transparentize($c, 0.3),
-                            lighten($osd_bg_color, 12%));
+    $_bg: if(sass($c!=$base_color): transparentize($c, 0.3);
+                            else: lighten($osd_bg_color, 12%));
 
     color: white;
     border-color: $osd_borders_color;
@@ -382,7 +382,7 @@ box-shadow: none;
   //
   // active osd button
   //
-    $_bg: if($c!=$base_color, $c, lighten($osd_bg_color, 6%));
+    $_bg: if(sass($c!=$base_color): $c; else: lighten($osd_bg_color, 6%));
 
     color: white;
     border-color: $osd_borders_color;
@@ -409,8 +409,8 @@ box-shadow: none;
   //
   // backdrop osd button
   //
-    $_bg: if($c!=$base_color, transparentize($c, 0.5),
-                            $osd_bg_color);
+    $_bg: if(sass($c!=$base_color): transparentize($c, 0.5);
+                            else: $osd_bg_color);
 
     color: $osd_fg_color;
     border-color: $osd_borders_color;
@@ -447,7 +447,7 @@ box-shadow: none;
                                       $c);
   }
 
-  border-color: if($c!=$bg_color, _border_color($c), $border_color);
+  border-color: if(sass($c!=$bg_color): _border_color($c); else: $border_color);
 
   @if not($noedge) {
     @if lightness($c) > 60% {
@@ -604,7 +604,7 @@ box-shadow: none;
   $_init_gradient_color : #C751FB;
   $_end_gradient_color : #6D44DE;
 
-  background: linear-gradient(to $dir, if($state==disabled, transparentize($_init_gradient_color, 0.5),$_init_gradient_color),if($state==disabled, transparentize($_end_gradient_color, 0.5),$_end_gradient_color));
+  background: linear-gradient(to $dir, if(sass($state==disabled): transparentize($_init_gradient_color, 0.5); else: $_init_gradient_color),if(sass($state==disabled): transparentize($_end_gradient_color, 0.5); else: $_end_gradient_color));
 }
 
 @mixin selected-tab($dir) {

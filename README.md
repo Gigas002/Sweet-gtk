@@ -30,7 +30,7 @@ GTK 4 apps read `gtk-theme` only if they don't use libadwaita; for the others, c
 
 ## Build
 
-Needs Python 3 and [dart-sass](https://sass-lang.com/dart-sass) (`sass`; on Arch Linux, `dart-sass`), plus Inkscape to render images. libsass and `sassc` won't do: they compile this SCSS into different CSS.
+Needs Python 3 and [dart-sass](https://sass-lang.com/dart-sass) 1.97.1 or later (`sass`; on Arch Linux, `dart-sass`), plus Inkscape to render images. libsass and `sassc` won't do: they compile this SCSS into different CSS.
 
 ```sh
 python3 build.py          # compile the SCSS into the .css files

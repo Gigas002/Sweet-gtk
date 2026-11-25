@@ -74,10 +74,13 @@ KNOWN_DEPRECATIONS = [
     "import",
     "global-builtin",
     "color-functions",
-    "if-function",
     "strict-unary",
     "slash-div",
 ]
+
+
+# CSS-style if(sass(...): a; else: b) is 1.95; before 1.97.1 it evaluated both branches.
+MIN_SASS = (1, 97, 1)
 
 
 def die(message):
@@ -89,8 +92,9 @@ def sass():
     if not exe:
         die("needs dart-sass (`sass`); on Arch Linux: pacman -S dart-sass")
     version = subprocess.run([exe, "--version"], capture_output=True, text=True).stdout
-    if not re.match(r"1\.\d+", version):
-        die(f"`sass` is not dart-sass 1.x (it says {version.strip()!r})")
+    m = re.match(r"(\d+)\.(\d+)\.(\d+)", version)
+    if not m or tuple(map(int, m.groups())) < MIN_SASS:
+        die(f"needs dart-sass {'.'.join(map(str, MIN_SASS))} or later (`sass` says {version.strip()!r})")
     return exe
 
 

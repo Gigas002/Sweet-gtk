@@ -36,7 +36,8 @@
     &:disabled {
       color: $insensitive_fg_color;
 
-      &:selected {
+      // .view again: %selected_items's 50 % mix for :disabled lists this selector too, later
+      &.view:selected {
         color: color.mix($selected_fg_color, $selected_bg_color, 40%);
         &:backdrop { color: color.mix($backdrop_selected_fg_color, $selected_bg_color, 30%); }
       }

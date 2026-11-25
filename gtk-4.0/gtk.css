@@ -1960,14 +1960,14 @@ iconview.content-view.radio:disabled:backdrop {
   -gtk-icon-shadow: none;
 }
 
-checkbutton.text-button, radiobutton.text-button {
+checkbutton.text-button {
   padding: 2px 0;
   outline-offset: 0;
 }
-checkbutton.text-button label:not(:only-child):first-child, radiobutton.text-button label:not(:only-child):first-child {
+checkbutton.text-button label:not(:only-child):first-child {
   margin-left: 4px;
 }
-checkbutton.text-button label:not(:only-child):last-child, radiobutton.text-button label:not(:only-child):last-child {
+checkbutton.text-button label:not(:only-child):last-child {
   margin-right: 4px;
 }
 
@@ -1977,24 +1977,6 @@ radio {
   min-height: 16px;
   min-width: 16px;
   border: none;
-}
-menu menuitem check,
-menu menuitem radio {
-  margin: 0;
-}
-menu menuitem check, menu menuitem check:hover, menu menuitem check:disabled,
-menu menuitem radio,
-menu menuitem radio:hover,
-menu menuitem radio:disabled {
-  min-height: 14px;
-  min-width: 14px;
-  background-image: none;
-  background-color: transparent;
-  box-shadow: none;
-  -gtk-icon-shadow: none;
-  color: inherit;
-  border-color: currentColor;
-  animation: none;
 }
 
 /*****************
@@ -2134,13 +2116,13 @@ combobox:drop(active) {
 /***********
  * Dialogs *
  ***********/
-messagedialog, .messagedialog, .dialog {
+.messagedialog, .dialog {
   background-color: #161925;
 }
-messagedialog .titlebar:not(headerbar), .messagedialog .titlebar:not(headerbar), .dialog .titlebar:not(headerbar) {
+.messagedialog .titlebar:not(headerbar), .dialog .titlebar:not(headerbar) {
   background-color: rgba(22, 25, 37, 0.95);
 }
-messagedialog .titlebar, .messagedialog .titlebar, .dialog .titlebar {
+.messagedialog .titlebar, .dialog .titlebar {
   min-height: 20px;
   background-image: none;
   background-color: rgba(22, 25, 37, 0.95);
@@ -2148,7 +2130,7 @@ messagedialog .titlebar, .messagedialog .titlebar, .dialog .titlebar {
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
 }
-messagedialog.csd.background, .messagedialog.csd.background, .dialog.csd.background {
+.messagedialog.csd.background, .dialog.csd.background {
   background-color: #141722;
   color: #C3C7D1;
   border-bottom-left-radius: 5px;
@@ -2171,11 +2153,6 @@ filechooser .dialog-action-box:backdrop {
 }
 filechooser #pathbarbox {
   border-bottom: 1px solid #161925;
-}
-
-filechooserbutton:drop(active) {
-  box-shadow: none;
-  border-color: transparent;
 }
 
 /****************
@@ -2375,7 +2352,7 @@ spinbutton.vertical > text progress:backdrop, spinbutton:not(.vertical) progress
 entry progress:backdrop {
   background-color: transparent;
 }
-spinbutton.linked.vertical:not(.vertical) > text:drop(active) + text, spinbutton.linked.vertical:not(.vertical) > spinbutton:drop(active):not(.vertical) + text, spinbutton.linked.vertical:not(.vertical) > text:drop(active) + spinbutton:not(.vertical), .linked:not(.vertical) > spinbutton:drop(active):not(.vertical) + spinbutton:not(.vertical), spinbutton.linked.vertical:not(.vertical) > text:drop(active) + button, .linked:not(.vertical) > spinbutton:drop(active):not(.vertical) + button, spinbutton.linked.vertical:not(.vertical) > text:drop(active) + menubutton > button, .linked:not(.vertical) > spinbutton:drop(active):not(.vertical) + menubutton > button, spinbutton.linked.vertical:not(.vertical) > text:drop(active) + dropdown > button, .linked:not(.vertical) > spinbutton:drop(active):not(.vertical) + dropdown > button, spinbutton.linked.vertical:not(.vertical) > text:drop(active) + colorbutton > button, .linked:not(.vertical) > spinbutton:drop(active):not(.vertical) + colorbutton > button, spinbutton.linked.vertical:not(.vertical) > text:drop(active) + fontbutton > button, .linked:not(.vertical) > spinbutton:drop(active):not(.vertical) + fontbutton > button, spinbutton.linked.vertical:not(.vertical) > text:drop(active) + filechooserbutton > button, .linked:not(.vertical) > spinbutton:drop(active):not(.vertical) + filechooserbutton > button, spinbutton.linked.vertical:not(.vertical) > text:drop(active) + filechooserbutton > combobox > box > button.combo, .linked:not(.vertical) > spinbutton:drop(active):not(.vertical) + filechooserbutton > combobox > box > button.combo, spinbutton.linked.vertical:not(.vertical) > text:drop(active) + appchooserbutton > combobox > box > button.combo, .linked:not(.vertical) > spinbutton:drop(active):not(.vertical) + appchooserbutton > combobox > box > button.combo, spinbutton.linked.vertical:not(.vertical) > text:drop(active) + combobox > box > button.combo, .linked:not(.vertical) > spinbutton:drop(active):not(.vertical) + combobox > box > button.combo,
+spinbutton.linked.vertical:not(.vertical) > text:drop(active) + text, spinbutton.linked.vertical:not(.vertical) > spinbutton:drop(active):not(.vertical) + text, spinbutton.linked.vertical:not(.vertical) > text:drop(active) + spinbutton:not(.vertical), .linked:not(.vertical) > spinbutton:drop(active):not(.vertical) + spinbutton:not(.vertical), spinbutton.linked.vertical:not(.vertical) > text:drop(active) + button, .linked:not(.vertical) > spinbutton:drop(active):not(.vertical) + button, spinbutton.linked.vertical:not(.vertical) > text:drop(active) + menubutton > button, .linked:not(.vertical) > spinbutton:drop(active):not(.vertical) + menubutton > button, spinbutton.linked.vertical:not(.vertical) > text:drop(active) + dropdown > button, .linked:not(.vertical) > spinbutton:drop(active):not(.vertical) + dropdown > button, spinbutton.linked.vertical:not(.vertical) > text:drop(active) + colorbutton > button, .linked:not(.vertical) > spinbutton:drop(active):not(.vertical) + colorbutton > button, spinbutton.linked.vertical:not(.vertical) > text:drop(active) + fontbutton > button, .linked:not(.vertical) > spinbutton:drop(active):not(.vertical) + fontbutton > button, spinbutton.linked.vertical:not(.vertical) > text:drop(active) + appchooserbutton > combobox > box > button.combo, .linked:not(.vertical) > spinbutton:drop(active):not(.vertical) + appchooserbutton > combobox > box > button.combo, spinbutton.linked.vertical:not(.vertical) > text:drop(active) + combobox > box > button.combo, .linked:not(.vertical) > spinbutton:drop(active):not(.vertical) + combobox > box > button.combo,
 spinbutton.linked.vertical:not(.vertical) > text:drop(active) + entry,
 .linked:not(.vertical) > spinbutton:drop(active):not(.vertical) + entry,
 .linked:not(.vertical) > entry:drop(active) + button,
@@ -2383,8 +2360,6 @@ spinbutton.linked.vertical:not(.vertical) > text:drop(active) + entry,
 .linked:not(.vertical) > entry:drop(active) + dropdown > button,
 .linked:not(.vertical) > entry:drop(active) + colorbutton > button,
 .linked:not(.vertical) > entry:drop(active) + fontbutton > button,
-.linked:not(.vertical) > entry:drop(active) + filechooserbutton > button,
-.linked:not(.vertical) > entry:drop(active) + filechooserbutton > combobox > box > button.combo,
 .linked:not(.vertical) > entry:drop(active) + appchooserbutton > combobox > box > button.combo,
 .linked:not(.vertical) > entry:drop(active) + combobox > box > button.combo,
 spinbutton.linked.vertical:not(.vertical) > entry:drop(active) + text,
@@ -2701,49 +2676,11 @@ separator {
 /************
  * Popovers *
  ************/
-GraniteWidgetsPopOver {
-  border: 1px solid #181b28;
-  background: #181b28;
-  color: #C3C7D1;
-}
-GraniteWidgetsPopOver .button {
-  background-image: none;
-  background: none;
-  border: none;
-}
-GraniteWidgetsPopOver .button:active, GraniteWidgetsPopOver .button:active:hover {
-  color: #c50ed2;
-}
-GraniteWidgetsPopOver > .frame {
-  border: none;
-}
-GraniteWidgetsPopOver .sidebar.view, GraniteWidgetsPopOver iconview.sidebar {
-  border: none;
-  background: none;
-}
-
-GraniteWidgetsStaticNotebook .frame {
-  border: none;
-}
-
 .popover_bg {
   background-color: #181b28;
   background-image: none;
   border: 1px solid #181b28;
   color: #C3C7D1;
-}
-
-/***********
- * Welcome *
- **********/
-GraniteWidgetsWelcome {
-  background-color: #181b28;
-}
-GraniteWidgetsWelcome GtkLabel {
-  color: #C3C7D1;
-}
-GraniteWidgetsWelcome .h1, GraniteWidgetsWelcome .h3 {
-  color: rgba(195, 199, 209, 0.8);
 }
 
 /**************
@@ -2776,9 +2713,7 @@ GraniteWidgetsWelcome .h1, GraniteWidgetsWelcome .h3 {
   border: none;
   padding: 0;
 }
-.source-list row > GtkLabel,
 .source-list row > label,
-.source-list .list-row > GtkLabel,
 .source-list .list-row > label {
   padding-left: 6px;
   padding-right: 6px;
@@ -3510,7 +3445,6 @@ menubar > item:disabled,
   box-shadow: none;
 }
 
-menu,
 .menu,
 .context-menu {
   font: initial;
@@ -3518,74 +3452,14 @@ menu,
   background: linear-gradient(to bottom, #1a1d2b, #12151f);
   border-radius: 5px;
 }
-.csd menu,
 .csd .menu,
 .csd .context-menu {
   border: none;
 }
-menu:backdrop,
 .menu:backdrop,
 .context-menu:backdrop {
   background-color: #191c2a;
 }
-menu menuitem,
-.menu menuitem,
-.context-menu menuitem {
-  min-height: 17px;
-  min-width: 40px;
-  padding: 4px 6px;
-  text-shadow: none;
-}
-menu menuitem:hover,
-.menu menuitem:hover,
-.context-menu menuitem:hover {
-  color: #fefefe;
-  background-color: #c50ed2;
-}
-menu menuitem:disabled,
-.menu menuitem:disabled,
-.context-menu menuitem:disabled {
-  color: #6c707b;
-}
-menu menuitem:disabled:backdrop,
-.menu menuitem:disabled:backdrop,
-.context-menu menuitem:disabled:backdrop {
-  color: #333955;
-}
-menu menuitem:backdrop, menu menuitem:backdrop:hover,
-.menu menuitem:backdrop,
-.menu menuitem:backdrop:hover,
-.context-menu menuitem:backdrop,
-.context-menu menuitem:backdrop:hover {
-  color: #6c707b;
-  background-color: transparent;
-}
-menu menuitem arrow,
-.menu menuitem arrow,
-.context-menu menuitem arrow {
-  min-height: 16px;
-  min-width: 16px;
-}
-menu menuitem arrow:dir(ltr),
-.menu menuitem arrow:dir(ltr),
-.context-menu menuitem arrow:dir(ltr) {
-  -gtk-icon-source: -gtk-icontheme("pan-end-symbolic");
-  margin-left: 10px;
-}
-menu menuitem arrow:dir(rtl),
-.menu menuitem arrow:dir(rtl),
-.context-menu menuitem arrow:dir(rtl) {
-  -gtk-icon-source: -gtk-icontheme("pan-end-symbolic-rtl");
-  margin-right: 10px;
-}
-menu menuitem label:dir(rtl), menu menuitem label:dir(ltr),
-.menu menuitem label:dir(rtl),
-.menu menuitem label:dir(ltr),
-.context-menu menuitem label:dir(rtl),
-.context-menu menuitem label:dir(ltr) {
-  color: inherit;
-}
-menu > arrow,
 .menu > arrow,
 .context-menu > arrow {
   background-color: transparent;
@@ -3600,53 +3474,31 @@ menu > arrow,
   background-color: #181b28;
   border-radius: 0;
 }
-menu > arrow.top,
 .menu > arrow.top,
 .context-menu > arrow.top {
   margin-top: -6px;
   border-bottom: 1px solid #292c39;
   -gtk-icon-source: -gtk-icontheme("pan-up-symbolic");
 }
-menu > arrow.bottom,
 .menu > arrow.bottom,
 .context-menu > arrow.bottom {
   margin-bottom: -6px;
   border-top: 1px solid #292c39;
   -gtk-icon-source: -gtk-icontheme("pan-down-symbolic");
 }
-menu > arrow:hover,
 .menu > arrow:hover,
 .context-menu > arrow:hover {
   background-color: #292c39;
 }
-menu > arrow:backdrop,
 .menu > arrow:backdrop,
 .context-menu > arrow:backdrop {
   background-color: #191c2a;
 }
-menu > arrow:disabled,
 .menu > arrow:disabled,
 .context-menu > arrow:disabled {
   color: transparent;
   background-color: transparent;
   border-color: transparent;
-}
-
-menuitem accelerator {
-  color: alpha(currentColor,0.55);
-}
-menuitem check,
-menuitem radio {
-  min-height: 16px;
-  min-width: 16px;
-}
-menuitem check:dir(ltr),
-menuitem radio:dir(ltr) {
-  margin-right: 7px;
-}
-menuitem check:dir(rtl),
-menuitem radio:dir(rtl) {
-  margin-left: 7px;
 }
 
 .csd.popup {
@@ -3673,34 +3525,6 @@ menuitem radio:dir(rtl) {
   background-color: rgba(195, 199, 209, 0.1);
   border-radius: 5px;
 }
-/************
-* Assistant *
-*************/
-assistant {
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-}
-assistant .sidebar {
-  background-color: #181b28;
-  border-top: 1px solid #090a0f;
-  border-bottom-left-radius: 4px;
-}
-assistant .sidebar:backdrop {
-  background-color: #1a1d2b;
-  border-color: #0a0b11;
-}
-assistant.csd .sidebar {
-  border-top-style: none;
-}
-assistant .sidebar GtkLabel,
-assistant .sidebar label {
-  padding: 6px 12px;
-}
-assistant .sidebar GtkLabel.highlight,
-assistant .sidebar label.highlight {
-  background-color: #393c47;
-}
-
 /*************
  * Notebooks *
  *************/
@@ -4200,8 +4024,7 @@ popover.background > contents {
 }
 popover.background > contents > list,
 popover.background > contents > .view,
-popover.background > contents > iconview,
-popover.background > contents > toolbar {
+popover.background > contents > iconview {
   border-style: none;
   background-color: transparent;
 }
@@ -5570,10 +5393,6 @@ spinbutton {
 /***********
  * Spinner *
  ***********/
-menu spinner {
-  color: #c50ed2;
-}
-
 /*********************
  * Spinner Animation *
  *********************/
@@ -5707,9 +5526,6 @@ tooltip {
   border-radius: 4px;
   box-shadow: none;
   text-shadow: 0 1px black;
-}
-tooltip decoration {
-  background-color: transparent;
 }
 tooltip * {
   padding: 4px;
@@ -6450,16 +6266,6 @@ agenda-view list.background:backdrop,
   -gtk-icon-shadow: 0 1px rgba(255, 255, 255, 0.1);
 }
 
-/**************
- * Calculator *
- **************/
-PantheonCalculatorMainWindow {
-  border-radius: 0 0 4px 4px;
-}
-PantheonCalculatorMainWindow .window-frame {
-  border-radius: 3px;
-}
-
 /*********
  * Cards *
  *********/
@@ -6479,35 +6285,9 @@ PantheonCalculatorMainWindow .window-frame {
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-/*********
- * Noise *
- *********/
-NoiseLibraryWindow {
-  border-radius: 0 0 4px 4px;
-}
-NoiseLibraryWindow .action-bar {
-  border-radius: 0 0 4px 4px;
-}
-NoiseLibraryWindow .window-frame {
-  border-radius: 3px;
-}
-
-/********
- * Snap *
- ********/
-SnapMainWindow .take-button,
-SnapSnapWindow .take-button {
-  border-radius: 0;
-}
-
 /*******************
  * Photos/Shotwell *
  *******************/
-DirectWindow .the-button-in-the-combobox,
-LibraryWindow .the-button-in-the-combobox {
-  background: none;
-}
-
 .checkerboard-layout {
   background-color: #161925;
   background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.1) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 0.1) 75%, rgba(0, 0, 0, 0.1)), linear-gradient(45deg, rgba(0, 0, 0, 0.1) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 0.1) 75%, rgba(0, 0, 0, 0.1));
@@ -6564,17 +6344,6 @@ checkbutton.color-button.none > check {
   background-color: transparent;
   border-radius: 100px;
   -gtk-icon-source: -gtk-icontheme("close-symbolic");
-}
-
-radiobutton.color-button > radio {
-  -gtk-icon-source: none;
-  margin-right: 0;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 100px;
-  background-clip: border-box;
-}
-radiobutton.color-button:active > radio {
-  border: 1px solid rgba(0, 0, 0, 0.35);
 }
 
 .color-button check,
@@ -6637,23 +6406,6 @@ radiobutton.color-button:active > radio {
 .geary-titlebar-left .separator,
 .geary-titlebar-right .separator {
   opacity: 0;
-}
-
-ConversationListView .view:active, ConversationListView iconview:active, ConversationListView .view:selected, ConversationListView iconview:selected {
-  background-color: #c50ed2;
-  color: #fefefe;
-}
-ConversationListView .view:active:backdrop, ConversationListView iconview:active:backdrop, ConversationListView .view:selected:backdrop, ConversationListView iconview:selected:backdrop {
-  background-color: rgba(197, 14, 210, 0.6);
-  color: rgba(254, 254, 254, 0.5);
-}
-ConversationListView .view .cell, ConversationListView iconview .cell {
-  border: solid rgba(0, 0, 0, 0.2);
-  border-width: 0 0 1px 0;
-}
-ConversationListView .view .cell:selected, ConversationListView iconview .cell:selected {
-  color: #fefefe;
-  border: 0px solid #980ba2;
 }
 
 .colorpad, .colorpad:backdrop, .colorpad:hover, .colorpad:hover:backdrop, .colorpad:active, .colorpad:active:backdrop, .colorpad:checked, .colorpad:checked:backdrop {

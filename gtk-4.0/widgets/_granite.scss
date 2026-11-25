@@ -6,58 +6,11 @@
    * Popovers *
    ************/
 
-  GraniteWidgetsPopOver {
-
-    border: 1px solid $base_color;
-    background: $base_color;
-    color: $fg_color;
-
-    .button {
-      background-image: none;
-      background: none;
-      border: none;
-
-      &:active,
-      &:active:hover, {
-        color: $selected_bg_color;
-      }
-    }
-
-    > .frame {
-      border:none;
-    }
-
-    .sidebar.view {
-      border: none;
-      background: none;
-    }
-  }
-
-  GraniteWidgetsStaticNotebook .frame {
-    border: none;
-  }
-
   .popover_bg {
     background-color: $base_color;
     background-image: none;
     border: 1px solid $base_color;
     color: $fg_color;
-  }
-
-  /***********
-   * Welcome *
-   **********/
-
-  GraniteWidgetsWelcome {
-    background-color: $base_color;
-
-    GtkLabel {
-      color: $fg_color;
-    }
-
-    .h1,.h3 {
-      color: color.adjust($fg_color, $alpha: -0.2);
-    }
   }
 
   /**************
@@ -98,7 +51,6 @@
       border:none;
       padding: 0;
 
-      > GtkLabel,
       > label {
         padding-left: 6px;
         padding-right: 6px;

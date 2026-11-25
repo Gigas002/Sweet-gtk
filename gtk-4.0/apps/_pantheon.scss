@@ -150,18 +150,6 @@
     }
   }
 
-  /**************
-   * Calculator *
-   **************/
-
-  PantheonCalculatorMainWindow {
-    border-radius: 0 0 4px 4px;
-
-    .window-frame {
-      border-radius:3px;
-    }
-  }
-
   /*********
    * Cards *
    *********/
@@ -184,45 +172,9 @@
                 0 1px 2px color.adjust(black, $alpha: -0.8);
   }
 
-  /*********
-   * Noise *
-   *********/
-
-  NoiseLibraryWindow {
-    border-radius: 0 0 4px 4px;
-
-    .action-bar {
-      border-radius: 0 0 4px 4px;
-    }
-
-    .window-frame {
-      border-radius:3px;
-    }
-  }
-
-  /********
-   * Snap *
-   ********/
-
-  SnapMainWindow,
-  SnapSnapWindow {
-
-    .take-button {
-      border-radius: 0;
-    }
-  }
-
   /*******************
    * Photos/Shotwell *
    *******************/
-
-  DirectWindow,
-  LibraryWindow {
-
-    .the-button-in-the-combobox {
-      background: none;
-    }
-  }
 
   .checkerboard-layout {
       background-color: $bg_color;
@@ -308,20 +260,6 @@
       }
     }
 
-  }
-
-  radiobutton.color-button {
-    > radio {
-      -gtk-icon-source: none;
-      margin-right: 0;
-      border: 1px solid rgba(black, 0.15);
-      border-radius: 100px;
-      background-clip: border-box;
-    }
-
-    &:active > radio {
-      border: 1px solid rgba(black, 0.35);
-    }
   }
 
   .color-button {

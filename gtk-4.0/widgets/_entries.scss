@@ -118,8 +118,6 @@
     .linked:not(.vertical) > &:drop(active) + dropdown > button,
     .linked:not(.vertical) > &:drop(active) + colorbutton > button,
     .linked:not(.vertical) > &:drop(active) + fontbutton > button,
-    .linked:not(.vertical) > &:drop(active) + filechooserbutton > button,
-    .linked:not(.vertical) > &:drop(active) + filechooserbutton > combobox > box > button.combo,
     .linked:not(.vertical) > &:drop(active) + appchooserbutton > combobox > box > button.combo,
     .linked:not(.vertical) > &:drop(active) + combobox > box > button.combo { border-left-color: $drop_target_color; }
 

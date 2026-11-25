@@ -28,7 +28,6 @@
     }
   }
 
-  menu,
   .menu,
   .context-menu {
     font: initial;
@@ -39,49 +38,6 @@
     .csd & { border: none; }  // axes borders in a composited env
 
     &:backdrop { background-color: $backdrop_menu_color; }
-
-    menuitem {
-      min-height: 17px;
-      min-width: 40px;
-      padding: 4px 6px;
-      text-shadow: none;
-
-      &:hover {
-        color: $selected_fg_color;
-        background-color: $selected_bg_color;
-      }
-
-      &:disabled {
-        color: $insensitive_fg_color;
-        &:backdrop { color: $backdrop_insensitive_color; }
-      }
-
-      &:backdrop,
-      &:backdrop:hover {
-        color: $backdrop_fg_color;
-        background-color: transparent;
-      }
-
-      // submenu indicators
-      arrow {
-        min-height: 16px;
-        min-width: 16px;
-
-        &:dir(ltr) {
-          -gtk-icon-source: -gtk-icontheme('pan-end-symbolic');
-          margin-left: 10px;
-        }
-
-        &:dir(rtl) {
-          -gtk-icon-source:-gtk-icontheme('pan-end-symbolic-rtl');
-          margin-right: 10px;
-        }
-      }
-
-      // avoids labels color being overridden, see
-      // https://bugzilla.gnome.org/show_bug.cgi?id=767058
-      label { &:dir(rtl), &:dir(ltr) { color: inherit; }}
-    }
 
     // overflow arrows
     > arrow {
@@ -114,19 +70,6 @@
         background-color: transparent;
         border-color: transparent ;
       }
-    }
-  }
-
-  menuitem {
-    accelerator { color: gtkalpha(currentColor,0.55); }
-
-    check,
-    radio {
-      min-height: 16px;
-      min-width: 16px;
-
-      &:dir(ltr) { margin-right: 7px; }
-      &:dir(rtl) { margin-left: 7px; }
     }
   }
 

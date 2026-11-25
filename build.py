@@ -67,14 +67,6 @@ INSTALL = [
     "gnome-shell/assets",
 ]
 
-# Deprecations the SCSS is known to use (@import). They become
-# errors in Dart Sass 3; until the SCSS moves to modules they are only noise. Anything else
-# sass reports still shows.
-KNOWN_DEPRECATIONS = [
-    "import",
-]
-
-
 # CSS-style if(sass(...): a; else: b) is 1.95; before 1.97.1 it evaluated both branches.
 MIN_SASS = (1, 97, 1)
 
@@ -114,14 +106,14 @@ def round_color(match):
 
 def compile_one(exe, name):
     """The CSS for NAME.scss, as text."""
-    command = [exe, "--no-source-map", "--style=expanded"]
-    command += [f"--silence-deprecation={d}" for d in KNOWN_DEPRECATIONS]
-    command.append(os.path.join(ROOT, name + ".scss"))
+    command = [exe, "--no-source-map", "--style=expanded", "--verbose", os.path.join(ROOT, name + ".scss")]
     result = subprocess.run(command, capture_output=True, text=True)
-    if result.stderr:
-        sys.stderr.write(result.stderr)
+    sys.stderr.write(result.stderr)
     if result.returncode:
         die(f"{name}.scss does not compile")
+    # A deprecation today is an error in the next major dart-sass; treat every warning as one.
+    if result.stderr:
+        die(f"{name}.scss compiles with warnings")
     css = PERCENT_RGB.sub(round_color, result.stdout)
     header = f"/* Generated from {os.path.basename(name)}.scss by build.py: edit that and rebuild. */\n"
     return header + css

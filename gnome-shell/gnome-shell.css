@@ -793,6 +793,7 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
   font-weight: bold;
   padding: 8px 0;
 }
+
 .pager-button {
   color: white;
   background-color: transparent;

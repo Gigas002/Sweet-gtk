@@ -124,7 +124,6 @@
     @at-root %nobg_selected_items, & {
       color: $selected_fg_color;
       font-weight: normal;
-      //&:hover{background-color: transparent;}
 
       @at-root &:disabled, %selected_items_disabled { color: color.mix($selected_fg_color, $selected_bg_color, 50%); }
 

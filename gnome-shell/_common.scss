@@ -113,7 +113,6 @@ $slider_size: 16px;
     StButton#vhandle, StButton#hhandle {
       border-radius: 8px;
       background-color: color.mix($fg_color, $bg_color, 20%);
-      //border: 3px solid transparent; //would be nice to margin or at least to transparent
       margin: 3px;
       &:hover { background-color: color.mix($fg_color, $bg_color, 80%); }
       &:active { background-color: $selected_bg_color; }
@@ -349,7 +348,6 @@ $slider_size: 16px;
     background-color: transparent;
     color: $fg_color;
 
-    //.popup-status-menu-item { font-weight: normal;  color: pink; } //dunno what that is
     &.panel-menu {
       -boxpointer-gap: 4px;
       margin-bottom: 1.75em;
@@ -733,8 +731,6 @@ $slider_size: 16px;
         }
       }
 
-      .datemenu-today-button .day-label {
-      }
 
       .datemenu-today-button .date-label {
         font-size: 1.5em;
@@ -764,7 +760,6 @@ $slider_size: 16px;
         color: color.adjust($fg_color, $lightness: -5%);
         font-weight: bold;
         padding: 8px 0;
-        &:focus {}
       }
 
       .pager-button {
@@ -825,9 +820,6 @@ $slider_size: 16px;
         }
         .calendar-day-top { border-top-width: 1px; }
         .calendar-day-left { border-left-width: 1px; }
-        .calendar-work-day {
-
-        }
          // Today
         .calendar-today {
           font-weight: bold;
@@ -887,7 +879,6 @@ $slider_size: 16px;
           .message {
             &:hover,&:focus { 
               background-color: color.adjust($bg_color, $lightness: 6%);
-              //box-shadow: 2px 0px 0px 0px $g2 inset;
               border-radius: 0px 7px 7px 0px;
              }
             border: 1px solid $borders_color;
@@ -896,13 +887,8 @@ $slider_size: 16px;
             box-shadow: none;
           }
 
-            .message-title {
-              //color: darken($fg_color,5%);
-
-            }
 
             .message-content {
-            //  color: darken($fg_color,20%);
               padding: 10px;
             }
 
@@ -1155,7 +1141,6 @@ $slider_size: 16px;
 
       .overview-icon { icon-size: 96px; }
     }
-    //.app-display { spacing: 20px; }
 
     .system-action-icon {
       background-color: black;
@@ -1271,7 +1256,6 @@ $slider_size: 16px;
       spacing: 11px;
       padding: 8px;
       border-radius: 0;
-      //border-width: 1px 0 1px 1px; //fixme: can't have non unoform borders :(
       &:rtl { border-radius: 0;}
     }
     .workspace-thumbnail-indicator {
@@ -1669,8 +1653,6 @@ $slider_size: 16px;
     & > StBoxLayout { padding: 0 6px*2; }
     &:ltr > StBoxLayout { padding-left: $base_padding*2.5; }
     &:rtl > StBoxLayout { padding-right: $base_padding*2.5; }
-
-    //.quick-toggle-icon, .quick-toggle-arrow { icon-size: $base_icon_size; }
   }
 
   .quick-menu-toggle, .quick-toggle-has-menu {
@@ -1730,7 +1712,6 @@ $slider_size: 16px;
       padding-bottom: 2 * $base_padding;
 
       & .icon {
-        // icon-size: $base_icon_size*1.5; // a non-standard symbolic size but ok
         border-radius: 999px;
         padding: 1.5 * $base_padding;
         background-color: color.adjust($bg_color, $lightness: 10%);

@@ -15,7 +15,6 @@
     border-radius: 0;
     &:backdrop {
       border-color: $backdrop_borders_color;
-     // background-image: none;
 
       transition: $backdrop_transition;
     }
@@ -71,11 +70,7 @@
       border: none;
       box-shadow: none;
       margin: 10px 0px;
-      &:first-child {
-      }
 
-      &:last-child {
-      }
 
       &:only-child {
         border-radius: 13px;
@@ -129,7 +124,6 @@
           &.flat, & {
             &:active,
             &:checked {
-              //@include button(backdrop-active, $selected_bg_color, $selected_fg_color);
               label{
                 color:$backdrop_selected_bg_color;
               }

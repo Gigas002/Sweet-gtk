@@ -68,7 +68,6 @@ $_wm_highlight: color.adjust(black, $alpha: -1);
   @define-color warning_color #{"" + $warning_color};
   @define-color error_color #{"" + $error_color};
   @define-color success_color #{"" + $success_color};
-  //@define-color destructive_color #{"" + $destructive_color}
 
   @define-color fg_color #{"" + $fg_color};
   @define-color text_color #{"" + $text_color};

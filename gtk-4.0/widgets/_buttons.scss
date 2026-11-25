@@ -238,9 +238,7 @@ $_dot_color: color.adjust($selected_bg_color, $lightness: 15%);
         }
 
         @at-root &.flat, %button_#{$b_type}_flat {
-         // @include button(undecorated);
           @include button(rounded, $b_color, white);
-          //color: $b_color; //FIXME: does it work on the dark variant?
         }
 
         &:hover { 

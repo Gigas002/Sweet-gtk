@@ -213,7 +213,6 @@ $button_transition: all 200ms $ease-out-quad;
 
   @if $t==rounded {
     box-shadow: none;
-  //  border: 1px solid $c;
     color: #fff;
     label { color:#fff; }
     border-radius: 8px;
@@ -222,7 +221,6 @@ $button_transition: all 200ms $ease-out-quad;
 
     @if $t==rounded-red {
       box-shadow: none;
-    //  border: 1px solid $c;
       color: #fff;
       label { color:#fff; }
       border-radius: 8px;
@@ -436,7 +434,6 @@ box-shadow: none;
   //
   // reset
   //
-   // border-color: transparent;
     background-color: transparent;
     background-image: none;
     border-color: transparent;

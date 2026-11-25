@@ -24,7 +24,6 @@ $teal: #00e8c6;
 
 $selected_fg_color: #fefefe;
 $selected_bg_color: #c50ed2;
-//$selected_bg_color: #f7005a;
 $selected_borders_color: color.adjust($selected_bg_color, $lightness: -10%);
 $borders_color: color.adjust($bg_color, $lightness: -7%);
 $borders_edge: color.adjust(white, $alpha: -0.9);

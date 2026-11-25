@@ -10,8 +10,6 @@ $_treeview_backdrop_borders_color: color.mix($backdrop_fg_color, $base_color, 20
     border-left-color:  $_treeview_borders_color; // this is actually the tree lines color,
     border-top-color: $_treeview_borders_color;                         // while this is the grid lines color, better then nothing
 
-    //@include focus-ring();
-
     > rubberband { @extend rubberband; } // to avoid borders being overridden by the previously set props
 
     &:selected {

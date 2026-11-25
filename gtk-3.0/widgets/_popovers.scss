@@ -1,47 +1,50 @@
 @use 'sass:color';
+@use '../colors' as *;
 
-/***************
- * Popovers   *
- ***************/
+@mixin styles {
+  /***************
+   * Popovers   *
+   ***************/
 
-popover.background {
-  padding: 2px;
-  border-radius: 5px;
-  background: linear-gradient(to bottom, color.adjust($bg_color, $lightness: 2%), color.adjust($bg_color, $lightness: -2%));
+  popover.background {
+    padding: 2px;
+    border-radius: 5px;
+    background: linear-gradient(to bottom, color.adjust($bg_color, $lightness: 2%), color.adjust($bg_color, $lightness: -2%));
 
-  .csd &, & { border: 1px solid $borders_color; }
+    .csd &, & { border: 1px solid $borders_color; }
 
-  box-shadow: 0 4px 6px $menu_shadow_color;
+    box-shadow: 0 4px 6px $menu_shadow_color;
 
-  &:backdrop {
-    background-color: $backdrop_bg_color;
-    box-shadow: none;
-  }
-
-  > list,
-  > .view,
-  > toolbar {
-    border-style: none;
-    background-color: transparent;
-  }
-
-  .csd &, & {
-    &.touch-selection,
-    &.magnifier {
-      @extend %osd;
-
-      border: 1px solid color.adjust(white, $alpha: -0.9);
-
-      button { @extend %osd_button };
+    &:backdrop {
+      background-color: $backdrop_bg_color;
+      box-shadow: none;
     }
 
-    &.osd { @extend %osd; }
+    > list,
+    > .view,
+    > toolbar {
+      border-style: none;
+      background-color: transparent;
+    }
+
+    .csd &, & {
+      &.touch-selection,
+      &.magnifier {
+        @extend %osd;
+
+        border: 1px solid color.adjust(white, $alpha: -0.9);
+
+        button { @extend %osd_button };
+      }
+
+      &.osd { @extend %osd; }
+    }
+
+    separator { margin: 3px; }
+
+    list separator { margin: 0px; }
+
+    checkbutton,
+    radiobutton { @extend %modelbutton_flat; }
   }
-
-  separator { margin: 3px; }
-
-  list separator { margin: 0px; }
-
-  checkbutton,
-  radiobutton { @extend %modelbutton_flat; }
 }

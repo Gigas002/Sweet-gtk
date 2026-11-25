@@ -1,49 +1,53 @@
 @use 'sass:color';
+@use '../colors' as *;
+@use '../drawing' as *;
 
-/*********
- * Lists *
- *********/
-list {
-  color: $text_color;
-  background-color: $base_color;
-  border-color: $borders_color;
+@mixin styles {
+  /*********
+   * Lists *
+   *********/
+  list {
+    color: $text_color;
+    background-color: $base_color;
+    border-color: $borders_color;
 
-  &:backdrop {
-    background-color: $backdrop_base_color;
-    border-color: $backdrop_borders_color;
-  }
-}
-
-row {
-  background-color: transparent;
-  border-color: $borders_color;
-  
-  &:hover { transition: none; }
-
-  &:backdrop { transition: $backdrop_transition; }
-
-  &.activatable {
-    &.has-open-popup, // this is for indicathing which row generated a popover see https://bugzilla.gnome.org/show_bug.cgi?id=754411
-
-    &:hover { background-color: color.adjust($fg_color, $alpha: -0.95); }
-
-    &:active { box-shadow: inset 0 2px 2px -2px color.adjust(black, $alpha: -0.8); }
-
-    &:backdrop:hover { background-color: transparent; }
-
-    &:selected {
-      &:active { box-shadow: inset 0 2px 3px -1px color.adjust(black, $alpha: -0.5); }
-
-      &.has-open-popup,
-      &:hover { background-color: color.adjust($selected_bg_color, $alpha: -0.5); }
-
-      &:backdrop { background-color: $backdrop_selected_bg_color; }
-    }
-    
-    button.flat{
-      background-color: transparent;
+    &:backdrop {
+      background-color: $backdrop_base_color;
+      border-color: $backdrop_borders_color;
     }
   }
 
-  &:selected { @extend %selected_items; }
+  row {
+    background-color: transparent;
+    border-color: $borders_color;
+
+    &:hover { transition: none; }
+
+    &:backdrop { transition: $backdrop_transition; }
+
+    &.activatable {
+      &.has-open-popup, // this is for indicathing which row generated a popover see https://bugzilla.gnome.org/show_bug.cgi?id=754411
+
+      &:hover { background-color: color.adjust($fg_color, $alpha: -0.95); }
+
+      &:active { box-shadow: inset 0 2px 2px -2px color.adjust(black, $alpha: -0.8); }
+
+      &:backdrop:hover { background-color: transparent; }
+
+      &:selected {
+        &:active { box-shadow: inset 0 2px 3px -1px color.adjust(black, $alpha: -0.5); }
+
+        &.has-open-popup,
+        &:hover { background-color: color.adjust($selected_bg_color, $alpha: -0.5); }
+
+        &:backdrop { background-color: $backdrop_selected_bg_color; }
+      }
+
+      button.flat{
+        background-color: transparent;
+      }
+    }
+
+    &:selected { @extend %selected_items; }
+  }
 }

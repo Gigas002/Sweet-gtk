@@ -1,9 +1,8 @@
 @use 'sass:color';
 @use 'sass:math';
+@use 'colors' as *;
 
-/*****************
-* Drawing mixins *
-*****************/
+// Drawing mixins
 
 // drawing of depth/shadows
 
@@ -76,7 +75,7 @@
                                                          // the border form the
                                                          // base color
 
-@function _text_shadow_color ($tc:$fg_color, $bg:$bg_color) {
+@function text_shadow_color ($tc:$fg_color, $bg:$bg_color) {
 //
 // calculate the color of text shadows
 //
@@ -101,7 +100,7 @@
   @else { @return color.adjust(white, $alpha: -0.9); }
 }
 
-@mixin _button_text_shadow ($tc:$fg_color, $bg:$bg_color) {
+@mixin button_text_shadow ($tc:$fg_color, $bg:$bg_color) {
 //
 // helper function for the text emboss effect
 //
@@ -110,7 +109,7 @@
 // TODO: this functions needs a way to deal with special cases
 //
 
-  $_shadow: _text_shadow_color($tc, $bg);
+  $_shadow: text_shadow_color($tc, $bg);
 
   @if color.channel($tc, "lightness", $space: hsl)<50% {
     text-shadow: 0 1px $_shadow;

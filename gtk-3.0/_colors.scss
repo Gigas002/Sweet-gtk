@@ -1,4 +1,5 @@
 @use 'sass:color';
+@forward 'elementary-colors';
 
 // Main definitions
 $base_color: color.adjust(#161925, $lightness: 1%);
@@ -7,7 +8,7 @@ $bg_color: #161925;
 $fg_color: #C3C7D1;
 $switch_bg: color.adjust(black, $alpha: -1);
 $shadow_color: rgba(162, 162, 165, 0.21);
-$_sidebar_color: #161925;
+$sidebar_color: #161925;
 
 // Primary colors
 $lime: #71f79f;
@@ -24,7 +25,6 @@ $teal: #00e8c6;
 $selected_fg_color: #fefefe;
 $selected_bg_color: #c50ed2;
 //$selected_bg_color: #f7005a;
-/*$selected_bg_color: #00e8c6;06d6a0*/
 $selected_borders_color: color.adjust($selected_bg_color, $lightness: -10%);
 $borders_color: color.adjust($bg_color, $lightness: -7%);
 $borders_edge: color.adjust(white, $alpha: -0.9);
@@ -56,7 +56,7 @@ $suggested_color: color.adjust($selected_bg_color, $lightness: -10%);
 
 $osd_fg_color: #fefefe;
 $osd_text_color: white;
-$osd_bg_color:  color.adjust(color.adjust($_sidebar_color, $lightness: -3%), $alpha: -0.02);
+$osd_bg_color:  color.adjust(color.adjust($sidebar_color, $lightness: -3%), $alpha: -0.02);
 $osd_insensitive_bg_color: color.adjust(color.mix($osd_fg_color, color.adjust($osd_bg_color, $alpha: 1), 10%), $alpha: -0.5);
 $osd_insensitive_fg_color: color.mix($osd_fg_color, color.adjust($osd_bg_color, $alpha: 1), 50%);
 $osd_borders_color: color.adjust(black, $alpha: -0.3);

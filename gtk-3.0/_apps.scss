@@ -1,12 +1,18 @@
-/**********************
- * DE-Specific Styles *
- **********************/
+@use 'apps/gnome';
+@use 'apps/pantheon';
+@use 'apps/geary';
 
-@import 'apps/gnome';
-@import 'apps/pantheon';
+@mixin styles {
+  /**********************
+   * DE-Specific Styles *
+   **********************/
 
-/***********************
- * App-Specific Styles *
- ***********************/
+  @include gnome.styles;
+  @include pantheon.styles;
 
-@import 'apps/geary';
+  /***********************
+   * App-Specific Styles *
+   ***********************/
+
+  @include geary.styles;
+}

@@ -1,5 +1,4 @@
 /* Generated from gtk.scss by build.py: edit that and rebuild. */
-/*$selected_bg_color: #00e8c6;06d6a0*/
 /* GTK NAMED COLORS
    ----------------
    use responsibly! */
@@ -131,9 +130,6 @@ read if you used those and something break with a version upgrade you're on your
 @define-color BLACK_500 #333;
 @define-color BLACK_700 #1a1a1a;
 @define-color BLACK_900 #000;
-/*****************
-* Drawing mixins *
-*****************/
 /*********
 * Common *
 *********/

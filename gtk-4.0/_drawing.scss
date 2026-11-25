@@ -1,9 +1,18 @@
 @use 'sass:color';
 @use 'sass:math';
+@use 'sass:string';
+@use 'colors' as *;
 
-/*****************
-* Drawing mixins *
-*****************/
+// Drawing mixins, and the values the widgets share
+
+@function gtkalpha($c,$a) {
+  @return string.unquote("alpha(#{$c},#{$a})");
+}
+
+$ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+$asset_suffix: '-dark';
+$backdrop_transition: 200ms ease-out;
+$button_transition: all 200ms $ease-out-quad;
 
 // generic drawing of more complex things
 
@@ -135,7 +144,7 @@
                                                          // the border form the
                                                          // base color
 
-@function _text_shadow_color ($tc: $fg_color, $bg: $bg_color) {
+@function text_shadow_color ($tc: $fg_color, $bg: $bg_color) {
 //
 // calculate the color of text shadows
 //
@@ -161,7 +170,7 @@
   @else { @return color.adjust(white, $alpha: -0.95); }
 }
 
-@mixin _button_text_shadow ($tc:$fg_color, $bg:$bg_color) {
+@mixin button_text_shadow ($tc:$fg_color, $bg:$bg_color) {
 //
 // helper function for the text emboss effect
 //
@@ -170,7 +179,7 @@
 // TODO: this functions needs a way to deal with special cases
 //
 
-  $_shadow: _text_shadow_color($tc, $bg);
+  $_shadow: text_shadow_color($tc, $bg);
 
   @if color.channel($tc, "lightness", $space: hsl)<50% {
     text-shadow: 0 1px $_shadow;

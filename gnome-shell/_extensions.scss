@@ -1,1 +1,5 @@
-@import "extensions/_openweather"
+@use 'extensions/openweather';
+
+@mixin styles {
+  @include openweather.styles;
+}

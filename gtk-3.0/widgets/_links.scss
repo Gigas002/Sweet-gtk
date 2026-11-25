@@ -1,53 +1,56 @@
 @use 'sass:color';
+@use '../colors' as *;
 
-/*********
- * Links *
- *********/
-// link buttons are listed rather than extending *:link: sass would drop their
-// selectors from the state rules as covered by *:link, and they need the specificity
-*:link,
-button:link,
-button:visited {
-  color: $link_color;
-
-  &:visited {
-    color: $link_visited_color;
-
-    *:selected & { color: color.mix($selected_fg_color, $selected_bg_color, 60%); }
-  }
-
-  &:hover {
-    color: color.adjust($link_color, $lightness: 10%);
-
-    *:selected & { color: color.mix($selected_fg_color, $selected_bg_color, 90%); }
-  }
-
-  &:active {
+@mixin styles {
+  /*********
+   * Links *
+   *********/
+  // link buttons are listed rather than extending *:link: sass would drop their
+  // selectors from the state rules as covered by *:link, and they need the specificity
+  *:link,
+  button:link,
+  button:visited {
     color: $link_color;
 
+    &:visited {
+      color: $link_visited_color;
+
+      *:selected & { color: color.mix($selected_fg_color, $selected_bg_color, 60%); }
+    }
+
+    &:hover {
+      color: color.adjust($link_color, $lightness: 10%);
+
+      *:selected & { color: color.mix($selected_fg_color, $selected_bg_color, 90%); }
+    }
+
+    &:active {
+      color: $link_color;
+
+      *:selected & { color: color.mix($selected_fg_color, $selected_bg_color, 80%); }
+    }
+
+    &:backdrop { &:backdrop:hover, &:backdrop:hover:selected, & { color: $selected_bg_color; }}
+
+    @at-root %link_selected,
+    &:selected,
     *:selected & { color: color.mix($selected_fg_color, $selected_bg_color, 80%); }
   }
 
-  &:backdrop { &:backdrop:hover, &:backdrop:hover:selected, & { color: $selected_bg_color; }}
-
-  @at-root %link_selected,
-  &:selected,
-  *:selected & { color: color.mix($selected_fg_color, $selected_bg_color, 80%); }
-}
-
-button:link,
-button:visited {
-  @extend %undecorated_button;
-
-  text-shadow: none;
-
-  &:hover,
-  &:active,
-  &:checked {
+  button:link,
+  button:visited {
     @extend %undecorated_button;
 
     text-shadow: none;
-  }
 
-  > label { text-decoration-line: underline; }
+    &:hover,
+    &:active,
+    &:checked {
+      @extend %undecorated_button;
+
+      text-shadow: none;
+    }
+
+    > label { text-decoration-line: underline; }
+  }
 }

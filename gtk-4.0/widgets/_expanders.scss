@@ -1,15 +1,17 @@
-/*************
- * Expanders *
- *************/
-expander {
-  min-width: 16px;
-  min-height: 16px;
-  -gtk-icon-source: -gtk-icontheme('pan-end-symbolic');
+@mixin styles {
+  /*************
+   * Expanders *
+   *************/
+  expander {
+    min-width: 16px;
+    min-height: 16px;
+    -gtk-icon-source: -gtk-icontheme('pan-end-symbolic');
 
-  &:dir(rtl) { -gtk-icon-source: -gtk-icontheme('pan-end-symbolic-rtl'); }
+    &:dir(rtl) { -gtk-icon-source: -gtk-icontheme('pan-end-symbolic-rtl'); }
 
-  &:hover { color: white; } //only lightens the arrow
+    &:hover { color: white; } //only lightens the arrow
 
-  &:checked { -gtk-icon-source: -gtk-icontheme('pan-down-symbolic'); }
-  
+    &:checked { -gtk-icon-source: -gtk-icontheme('pan-down-symbolic'); }
+
+  }
 }

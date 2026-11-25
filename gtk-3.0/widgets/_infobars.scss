@@ -1,51 +1,77 @@
 @use 'sass:color';
+@use '../colors' as *;
 
-/**************
- * GtkInfoBar *
- **************/
-%infobar,
-infobar {
-  text-shadow: none;
-  color: $fg_color;
-  background-color: $bg_color;
-  border-bottom:1px solid color.adjust($bg_color, $lightness: -10%);
-  box-shadow: 0 1px 0 0 color.adjust(black, $alpha: -0.95),
-              0 1px 2px 0 color.adjust(black, $alpha: -0.85);
+@mixin styles {
+  /**************
+   * GtkInfoBar *
+   **************/
+  %infobar,
+  infobar {
+    text-shadow: none;
+    color: $fg_color;
+    background-color: $bg_color;
+    border-bottom:1px solid color.adjust($bg_color, $lightness: -10%);
+    box-shadow: 0 1px 0 0 color.adjust(black, $alpha: -0.95),
+                0 1px 2px 0 color.adjust(black, $alpha: -0.85);
 
-}
-
-%color_infobar {
-
-  @extend %infobar;
-
-  text-shadow: none;
-  color: $selected_fg_color;
-  border:none;
-
-  .label {
-    color: $selected_fg_color;
-
-    &:backdrop {
-      color: $backdrop_selected_fg_color;
-    }
   }
 
-  button {
-    border-radius: 2px;
-    border: none;
-    background: color.adjust($base_color, $alpha: -0.02);
-    color: $fg_color;
-    box-shadow: 0 1px 0 0 color.adjust(black, $alpha: -0.8);
+  %color_infobar {
+
+    @extend %infobar;
+
+    text-shadow: none;
+    color: $selected_fg_color;
+    border:none;
 
     .label {
-      color: $fg_color;
+      color: $selected_fg_color;
+
+      &:backdrop {
+        color: $backdrop_selected_fg_color;
+      }
     }
 
-    &:active {
-      background: $base_color;
+    button {
+      border-radius: 2px;
+      border: none;
+      background: color.adjust($base_color, $alpha: -0.02);
       color: $fg_color;
+      box-shadow: 0 1px 0 0 color.adjust(black, $alpha: -0.8);
 
-      box-shadow: 0 1px 2px 0 color.adjust(black, $alpha: -0.6);
+      .label {
+        color: $fg_color;
+      }
+
+      &:active {
+        background: $base_color;
+        color: $fg_color;
+
+        box-shadow: 0 1px 2px 0 color.adjust(black, $alpha: -0.6);
+
+        &:backdrop {
+          background: color.adjust($base_color, $alpha: -0.2);
+          color: color.adjust($fg_color, $alpha: -0.5);
+          box-shadow: none;
+        }
+      }
+
+      &:hover,
+      &:focus {
+        box-shadow: 0 1px 2px 0 color.adjust(black, $alpha: -0.6);
+      }
+
+      &:disabled {
+        background: color.adjust($base_color, $alpha: -0.4);
+        color: color.adjust($fg_color, $alpha: -0.5);
+        box-shadow: none;
+
+          &:backdrop {
+            background: color.adjust($base_color, $alpha: -0.5);
+            color: color.adjust($fg_color, $alpha: -0.5);
+            box-shadow: none;
+          }
+      }
 
       &:backdrop {
         background: color.adjust($base_color, $alpha: -0.2);
@@ -53,70 +79,47 @@ infobar {
         box-shadow: none;
       }
     }
+  }
 
-    &:hover,
-    &:focus {
-      box-shadow: 0 1px 2px 0 color.adjust(black, $alpha: -0.6);
-    }
-
-    &:disabled {
-      background: color.adjust($base_color, $alpha: -0.4);
-      color: color.adjust($fg_color, $alpha: -0.5);
-      box-shadow: none;
-
-        &:backdrop {
-          background: color.adjust($base_color, $alpha: -0.5);
-          color: color.adjust($fg_color, $alpha: -0.5);
-          box-shadow: none;
-        }
-    }
+  .info {
+    @extend %color_infobar;
+    background-color: $info_color;
+    color: #000000;
 
     &:backdrop {
-      background: color.adjust($base_color, $alpha: -0.2);
-      color: color.adjust($fg_color, $alpha: -0.5);
-      box-shadow: none;
+      background-color:color.adjust($info_color, $lightness: 10%);
+      color: $backdrop_selected_fg_color;
     }
   }
-}
 
-.info {
-  @extend %color_infobar;
-  background-color: $info_color;
-  color: #000000;
+  .warning {
+    @extend %color_infobar;
+    background-color: $warning_color;
 
-  &:backdrop {
-    background-color:color.adjust($info_color, $lightness: 10%);
-    color: $backdrop_selected_fg_color;
-  }
-}
-
-.warning {
-  @extend %color_infobar;
-  background-color: $warning_color;
-
-  &:backdrop {
-    background-color:color.adjust($warning_color, $lightness: 10%);
-    color: $backdrop_selected_fg_color;
-  }
-}
-
-.question {
-  @extend %color_infobar;
-  background-color: $question_color;
-
-  &:backdrop {
-    background-color:color.adjust($question_color, $lightness: 10%);
-    color: $backdrop_selected_fg_color;
+    &:backdrop {
+      background-color:color.adjust($warning_color, $lightness: 10%);
+      color: $backdrop_selected_fg_color;
+    }
   }
 
-}
+  .question {
+    @extend %color_infobar;
+    background-color: $question_color;
 
-.error {
-  @extend %color_infobar;
-  background-color: $error_color;
+    &:backdrop {
+      background-color:color.adjust($question_color, $lightness: 10%);
+      color: $backdrop_selected_fg_color;
+    }
 
-  &:backdrop {
-    background-color:color.adjust($error_color, $lightness: 10%);
-    color: $backdrop_selected_fg_color;
+  }
+
+  .error {
+    @extend %color_infobar;
+    background-color: $error_color;
+
+    &:backdrop {
+      background-color:color.adjust($error_color, $lightness: 10%);
+      color: $backdrop_selected_fg_color;
+    }
   }
 }

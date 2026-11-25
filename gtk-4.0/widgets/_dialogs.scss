@@ -1,54 +1,57 @@
 @use 'sass:color';
+@use '../colors' as *;
 
-/***********
- * Dialogs *
- ***********/
- messagedialog, .messagedialog, .dialog { // Message Dialog styling
+@mixin styles {
+  /***********
+   * Dialogs *
+   ***********/
+   messagedialog, .messagedialog, .dialog { // Message Dialog styling
 
-  background-color: $bg_color;
-  .titlebar:not(headerbar) {
-    background-color: color.adjust($bg_color, $alpha: -0.05);
-  }
-  .titlebar {
-    min-height: 20px;
-    background-image: none;
-    background-color: color.adjust($bg_color, $alpha: -0.05);
-    border-style: none;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-  }
+    background-color: $bg_color;
+    .titlebar:not(headerbar) {
+      background-color: color.adjust($bg_color, $alpha: -0.05);
+    }
+    .titlebar {
+      min-height: 20px;
+      background-image: none;
+      background-color: color.adjust($bg_color, $alpha: -0.05);
+      border-style: none;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+    }
 
-  &.csd { // rounded bottom border styling for csd version
-    &.background {
-      background-color: color.adjust($bg_color, $lightness: -1%);
-      color: $fg_color;
+    &.csd { // rounded bottom border styling for csd version
+      &.background {
+        background-color: color.adjust($bg_color, $lightness: -1%);
+        color: $fg_color;
 
-      // bigger radius for better antialiasing
-      border-bottom-left-radius: 5px;
-      border-bottom-right-radius: 5px;
+        // bigger radius for better antialiasing
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+      }
     }
   }
-}
 
-.messagedialog .message-area,
-.messagedialog .response-area,
-.dialog .dialog-action-area,
-.alert.floating .response-area,
-.alert.floating .body-scrolled-window {
-  padding: 26px;
-}
-
-filechooser {
-  .dialog-action-box {
-    border-top: 1px solid $borders_color;
-
-    &:backdrop { border-top-color: $backdrop_borders_color; }
+  .messagedialog .message-area,
+  .messagedialog .response-area,
+  .dialog .dialog-action-area,
+  .alert.floating .response-area,
+  .alert.floating .body-scrolled-window {
+    padding: 26px;
   }
 
-  #pathbarbox { border-bottom: 1px solid $bg_color; }
-}
+  filechooser {
+    .dialog-action-box {
+      border-top: 1px solid $borders_color;
 
-filechooserbutton:drop(active) {
-  box-shadow: none;
-  border-color: transparent;
+      &:backdrop { border-top-color: $backdrop_borders_color; }
+    }
+
+    #pathbarbox { border-bottom: 1px solid $bg_color; }
+  }
+
+  filechooserbutton:drop(active) {
+    box-shadow: none;
+    border-color: transparent;
+  }
 }

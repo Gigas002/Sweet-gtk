@@ -43,9 +43,12 @@ python3 build.py check    # fail if a .css is out of date, or an image is missin
 
 The `.css` files are generated: edit the `.scss` and rebuild.
 
-- `gtk-3.0/_colors.scss`: the palette. `gtk-4.0` imports it too.
-- `gtk-3.0/_common.scss`, `gtk-4.0/_common.scss`: widgets, one file per widget in `widgets/`, app styles in `apps/`.
+- `gtk-3.0/_colors.scss`: the palette. `gtk-4.0/_colors.scss` forwards it.
+- `gtk-3.0/_drawing.scss`, `gtk-4.0/_drawing.scss`: the mixins and functions that draw buttons, entries and so on, and the shared transitions.
+- `gtk-3.0/_common.scss`, `gtk-4.0/_common.scss`: defaults for every widget; one file per widget in `widgets/`, app styles in `apps/`.
 - `gnome-shell/_common.scss`: the shell; `extensions/` styles the OpenWeather extension.
+
+The SCSS uses Sass modules (`@use`), not `@import`. A file that writes CSS keeps its rules in a mixin called `styles`, and `gtk.scss` (or `gnome-shell.scss`) includes them all in order. That way an `@extend` in one file still reaches selectors in every other file, which plain `@use` wouldn't allow. A new widget file starts with the `@use` lines it needs (`'../colors' as *`, `'../drawing' as *`, `'sass:color'`), wraps its rules in `@mixin styles { ... }`, and is added to `_widgets.scss`.
 - `src/assets.svg`: the check and radio images. Each is drawn in a layer labelled `Baseplate`, over a rect whose area is exported, with a text labelled `icon-name` giving the file name; `build.py assets` renders those a stylesheet names, at scale 1 and 2. The window buttons and switches in `assets/` are drawn by hand.
 
 `tests/compare.py OLD [NEW]` renders two revisions (default NEW: the working tree) in private headless sway and GNOME Shell sessions and reports which pixels changed; see its header. [docs/AUDIT.md](docs/AUDIT.md) describes the 2026 clean-up.

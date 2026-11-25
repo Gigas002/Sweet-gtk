@@ -1,7 +1,11 @@
-@import 'colors';
-@import 'elementary-colors';
-@import 'colors-public';
-@import 'drawing';
-@import 'common';
-@import 'widgets';
-@import 'apps';
+// Each partial wraps its rules in a `styles` mixin, and they are all included here, so
+// that every @extend sees the whole stylesheet (as with @import).
+@use 'colors-public';
+@use 'common';
+@use 'widgets';
+@use 'apps';
+
+@include colors-public.styles;
+@include common.styles;
+@include widgets.styles;
+@include apps.styles;

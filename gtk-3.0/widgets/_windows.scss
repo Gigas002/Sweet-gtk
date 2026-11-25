@@ -1,137 +1,140 @@
 @use 'sass:color';
+@use '../colors' as *;
+@use '../drawing' as *;
 
-/**********************
- * Window Decorations *
- *********************/
-decoration {
-  border-radius: 4px 4px 0 0;
-
-  // lamefun trick to get rounded borders regardless of CSD use
-  border-width: 0px;
-
-  // this needs to be transparent
-  // see bug #722563
-  $_wm_border: color.adjust($borders_color, $alpha: -0.1);
-  $_wm_border_backdrop: color.adjust($borders_color, $alpha: -0.1);
+@mixin styles {
+  /**********************
+   * Window Decorations *
+   *********************/
+  decoration {
+    border-radius: 4px 4px 0 0;
 
     // lamefun trick to get rounded borders regardless of CSD use
-  border-width: 0px;
+    border-width: 0px;
 
-  box-shadow: 0 4px 10px 2px color.adjust($borders_color, $alpha: -0.2);
-  // FIXME rationalize shadows
+    // this needs to be transparent
+    // see bug #722563
+    $_wm_border: color.adjust($borders_color, $alpha: -0.1);
+    $_wm_border_backdrop: color.adjust($borders_color, $alpha: -0.1);
 
-  // this is used for the resize cursor area
-  margin: 10px;
+      // lamefun trick to get rounded borders regardless of CSD use
+    border-width: 0px;
 
-  &:backdrop {
-    // the transparent shadow here is to enforce that the shadow extents don't
-    // change when we go to backdrop, to prevent jumping windows.
-    // The biggest shadow should be in the same order then in the active state
-    // or the jumping will happen during the transition.
-    box-shadow: 0 4px 10px 2px color.adjust($borders_color, $alpha: -0.4);
-    transition: $backdrop_transition;
+    box-shadow: 0 4px 10px 2px color.adjust($borders_color, $alpha: -0.2);
+    // FIXME rationalize shadows
+
+    // this is used for the resize cursor area
+    margin: 10px;
+
+    &:backdrop {
+      // the transparent shadow here is to enforce that the shadow extents don't
+      // change when we go to backdrop, to prevent jumping windows.
+      // The biggest shadow should be in the same order then in the active state
+      // or the jumping will happen during the transition.
+      box-shadow: 0 4px 10px 2px color.adjust($borders_color, $alpha: -0.4);
+      transition: $backdrop_transition;
+    }
+
+    .maximized &,
+    .fullscreen &,
+    .tiled & { border-radius: 0; }
+
+    .popup & { box-shadow: none; }
+
+    // server-side decorations as used by mutter
+    .ssd & { box-shadow: none; } //just doing borders, wm draws actual shadows
+
+    .csd.popup & {
+      border-radius: 7px;
+      box-shadow: 0 4px 8px $menu_shadow_color;
+      border: 1px solid $borders_color;
+    }
+
+    tooltip.csd & {
+      border-radius: 5px;
+      box-shadow: none;
+    }
+
+    messagedialog.csd & {
+      border-radius: 7px;
+      box-shadow: 0 1px 2px color.adjust(black, $alpha: -0.8),
+                    0 0 0 1px color.adjust($_wm_border, $alpha: -0.1);
+    }
+
+    .solid-csd & {
+      border-radius: 0;
+      margin: 0px;
+      background-color: $backdrop_bg_color;
+      border: solid 1px $backdrop_borders_color;
+      box-shadow: none;
+    }
   }
 
-  .maximized &,
-  .fullscreen &,
-  .tiled & { border-radius: 0; }
-
-  .popup & { box-shadow: none; }
-
-  // server-side decorations as used by mutter
-  .ssd & { box-shadow: none; } //just doing borders, wm draws actual shadows
-
-  .csd.popup & {
-    border-radius: 7px;
-    box-shadow: 0 4px 8px $menu_shadow_color;
-    border: 1px solid $borders_color;
-  }
-
-  tooltip.csd & {
-    border-radius: 5px;
+  // Window Close button
+  button.titlebutton {
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 20px;
+    padding: 0 1px;
     box-shadow: none;
-  }
 
-  messagedialog.csd & {
-    border-radius: 7px;
-    box-shadow: 0 1px 2px color.adjust(black, $alpha: -0.8),
-                  0 0 0 1px color.adjust($_wm_border, $alpha: -0.1);
-  }
-
-  .solid-csd & {
-    border-radius: 0;
-    margin: 0px;
-    background-color: $backdrop_bg_color;
-    border: solid 1px $backdrop_borders_color;
-    box-shadow: none;
-  }
-}
-
-// Window Close button
-button.titlebutton {
-  background-repeat: no-repeat;
-  background-position: center;
-  min-height: 20px;
-  padding: 0 1px;
-  box-shadow: none;
-  
-  &.close {
-    background-image: -gtk-scaled(url("../assets/close.png"),url("../assets/close@2.png"));
-    &:hover,&:active {
-      background-image: -gtk-scaled(url("../assets/close_prelight.png"),url("../assets/close_prelight@2.png"));
+    &.close {
+      background-image: -gtk-scaled(url("../assets/close.png"),url("../assets/close@2.png"));
+      &:hover,&:active {
+        background-image: -gtk-scaled(url("../assets/close_prelight.png"),url("../assets/close_prelight@2.png"));
+      }
     }
-  }
-  &.maximize {
-    background-image: -gtk-scaled(url("../assets/maximize.png"),url("../assets/maximize@2.png"));
-    &:hover,&:active {
-      background-image: -gtk-scaled(url("../assets/maximize_prelight.png"),url("../assets/maximize_prelight@2.png"));
+    &.maximize {
+      background-image: -gtk-scaled(url("../assets/maximize.png"),url("../assets/maximize@2.png"));
+      &:hover,&:active {
+        background-image: -gtk-scaled(url("../assets/maximize_prelight.png"),url("../assets/maximize_prelight@2.png"));
+      }
     }
-  }
-  &.minimize {
-    background-image: -gtk-scaled(url("../assets/min.png"),url("../assets/min@2.png"));
-    &:hover,&:active {
-      background-image: -gtk-scaled(url("../assets/min_prelight.png"),url("../assets/min_prelight@2.png"));
+    &.minimize {
+      background-image: -gtk-scaled(url("../assets/min.png"),url("../assets/min@2.png"));
+      &:hover,&:active {
+        background-image: -gtk-scaled(url("../assets/min_prelight.png"),url("../assets/min_prelight@2.png"));
+      }
+    }
+
+    .selection-mode & {
+      @extend %button_suggested-action_flat;
+
+      @extend %nobg_selected_items;
+    }
+
+    &:backdrop { 
+      -gtk-icon-shadow: none; 
+      background-image: -gtk-scaled(url("../assets/close_unfocused.png"),url("../assets/close_unfocused@2.png"));
     }
   }
 
-  .selection-mode & {
-    @extend %button_suggested-action_flat;
+  headerbar.selection-mode button.titlebutton,
+  .titlebar.selection-mode button.titlebutton {
+    @include button_text_shadow(white, $selected_bg_color);
 
-    @extend %nobg_selected_items;
+    &:backdrop { -gtk-icon-shadow: none; }
   }
 
-  &:backdrop { 
-    -gtk-icon-shadow: none; 
-    background-image: -gtk-scaled(url("../assets/close_unfocused.png"),url("../assets/close_unfocused@2.png"));
-  }
-}
+  // catch all extend :)
 
-headerbar.selection-mode button.titlebutton,
-.titlebar.selection-mode button.titlebutton {
-  @include _button_text_shadow(white, $selected_bg_color);
+  %selected_items {
+    background-color: $selected_bg_color;
 
-  &:backdrop { -gtk-icon-shadow: none; }
-}
+    @at-root %nobg_selected_items, & {
+      color: $selected_fg_color;
+      font-weight: normal;
+      //&:hover{background-color: transparent;}
 
+      @at-root &:disabled, %selected_items_disabled { color: color.mix($selected_fg_color, $selected_bg_color, 50%); }
 
-// catch all extend :)
+      @at-root &:backdrop, %selected_items_backdrop {
+        color: $backdrop_selected_fg_color;
 
-%selected_items {
-  background-color: $selected_bg_color;
-
-  @at-root %nobg_selected_items, & {
-    color: $selected_fg_color;
-    font-weight: normal;
-    //&:hover{background-color: transparent;}
-
-    @at-root &:disabled, %selected_items_disabled { color: color.mix($selected_fg_color, $selected_bg_color, 50%); }
-
-    @at-root &:backdrop, %selected_items_backdrop {
-      color: $backdrop_selected_fg_color;
-
-      @at-root &:disabled, %selected_items_disabled:backdrop { color: color.mix($backdrop_selected_fg_color, $selected_bg_color, 30%); }
+        @at-root &:disabled, %selected_items_disabled:backdrop { color: color.mix($backdrop_selected_fg_color, $selected_bg_color, 30%); }
+      }
     }
   }
-}
 
-.monospace { font-family: Monospace; }
+  .monospace { font-family: Monospace; }
+}

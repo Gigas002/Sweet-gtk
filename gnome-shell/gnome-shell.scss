@@ -1,4 +1,6 @@
-@import "colors"; //use gtk colors
-@import "drawing";
-@import "common";
-@import "extensions"
+// Each partial wraps its rules in a `styles` mixin, included here (see gtk-3.0/gtk.scss).
+@use 'common';
+@use 'extensions';
+
+@include common.styles;
+@include extensions.styles;

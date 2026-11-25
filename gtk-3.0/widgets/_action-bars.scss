@@ -1,29 +1,32 @@
 @use 'sass:color';
+@use '../colors' as *;
 
-/***************
-* Action bars *
-***************/
+@mixin styles {
+  /***************
+  * Action bars *
+  ***************/
 
-.action-bar {
-  background-color: color.adjust($bg_color, $lightness: -10%);
-  border: solid $borders_color;
-  border-width: 1px 0 0 0;
-  color: $fg_color;
-  box-shadow: none;
-
-  &:backdrop {
-    background-color: color.adjust($backdrop_bg_color, $lightness: -10%);
+  .action-bar {
+    background-color: color.adjust($bg_color, $lightness: -10%);
+    border: solid $borders_color;
+    border-width: 1px 0 0 0;
+    color: $fg_color;
     box-shadow: none;
-    -gtk-icon-effect: dim;
-  }
 
-  &:first-child {
-    border-radius: 6px 6px 0px 0px;
-    border-width: 1px 1px 0px 1px;
-  }
+    &:backdrop {
+      background-color: color.adjust($backdrop_bg_color, $lightness: -10%);
+      box-shadow: none;
+      -gtk-icon-effect: dim;
+    }
 
-  &:last-child {
-    border-radius: 0 0 6px 6px;
-    border-width: 0px 1px 1px 1px;
+    &:first-child {
+      border-radius: 6px 6px 0px 0px;
+      border-width: 1px 1px 0px 1px;
+    }
+
+    &:last-child {
+      border-radius: 0 0 6px 6px;
+      border-width: 0px 1px 1px 1px;
+    }
   }
 }

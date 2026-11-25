@@ -1,7 +1,7 @@
 """A window of GTK widgets, for comparing themes: gallery.py GTKVER STATE OUT.png
 
-GTKVER is 3 or 4; STATE is normal, hover, active, disabled or backdrop, forced on every
-widget. It takes a screenshot of the output with grim and exits, so it must run as the only
+GTKVER is 3 or 4; STATE is normal, hover, active, disabled, backdrop or disabled-backdrop
+(insensitive headerbars and widgets in an unfocused window), forced on every widget. It takes a screenshot of the output with grim and exits, so it must run as the only
 window of a compositor (tests/compare.py runs it in a private headless sway)."""
 import subprocess
 import sys
@@ -129,9 +129,10 @@ contentview = css(hbox(check('sel check', False), rsel, check('sel radio 2', Fal
 col2 = vbox(listbox(), treeview(), textview(), exp, cal, contentview)
 body = hbox(col1, col2, sp=18)
 win = Gtk.Window(); win.set_default_size(1200, 760)
-root = vbox(headerbar(True), body, sp=12)
-if G4: win.set_titlebar(headerbar()); win.set_child(root)
-else: win.set_titlebar(headerbar()); win.add(root)
+bars = [headerbar(True), headerbar()]
+root = vbox(bars[0], body, sp=12)
+win.set_titlebar(bars[1])
+win.set_child(root) if G4 else win.add(root)
 
 FLAGS = {'hover': Gtk.StateFlags.PRELIGHT, 'active': Gtk.StateFlags.ACTIVE, 'backdrop': Gtk.StateFlags.BACKDROP}
 
@@ -145,8 +146,10 @@ def walk(w):
 
 def apply():
     if state == 'disabled':
-        for w in (body, ):
-            w.set_sensitive(False)
+        body.set_sensitive(False)
+    elif state == 'disabled-backdrop':
+        for w in [body] + bars: w.set_sensitive(False)
+        win.set_state_flags(Gtk.StateFlags.BACKDROP, False)
     elif state in FLAGS:
         targets = [win] if state == 'backdrop' else list(walk(body))
         for w in targets: w.set_state_flags(FLAGS[state], False)

@@ -6,8 +6,8 @@
 OLD and NEW are git revisions; NEW defaults to the working tree (as built: run build.py
 first). Both are rendered in private headless sessions, so the desktop is never touched:
 
-  --gtk    tests/gallery.py, a window of GTK 3 and GTK 4 widgets, in each of five states
-           (normal, hover, active, disabled, backdrop), in headless sway
+  --gtk    tests/gallery.py, a window of GTK 3 and GTK 4 widgets, in each of six states
+           (normal, hover, active, disabled, backdrop, and disabled in backdrop), in headless sway
   --shell  GNOME Shell's main views (desktop with a notification, overview with two windows,
            search, app grid, an app menu, quick settings, its power menu, the log out dialog,
            calendar, a dialog with check boxes
@@ -38,7 +38,7 @@ from PIL import Image, ImageChops
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 PARTS = ["index.theme", "assets", "gtk-3.0", "gtk-4.0", "gnome-shell"]
-STATES = ["normal", "hover", "active", "disabled", "backdrop"]
+STATES = ["normal", "hover", "active", "disabled", "backdrop", "disabled-backdrop"]
 SHELL_SHOTS = ["welcome", "desktop", "overview", "search", "apps", "app-menu", "quick-settings", "power-menu",
                "end-session", "calendar", "dialog", "osd", "switcher", "screenshot-ui", "lock", "unlock-prompt"]
 
